@@ -13,13 +13,12 @@
       --teal: #4ecdc4;
       --white: #f5f5f0;
       --muted: #888;
+      --muted-light: rgba(245,245,240,0.5);
       --border: rgba(255,255,255,0.08);
+      --border-teal: rgba(78,205,196,0.25);
     }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
-    }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
 
     body {
       background: var(--bg);
@@ -37,7 +36,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px 48px;
-      background: rgba(13,13,13,0.9);
+      background: rgba(13,13,13,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -48,17 +47,16 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--teal);
+      text-decoration: none;
     }
 
     .nav-back {
-      font-family: 'Inter', sans-serif;
       font-size: 11px;
       letter-spacing: 0.12em;
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .nav-back:hover { color: var(--teal); }
 
     /* ── SECTIONS ── */
@@ -71,24 +69,18 @@
       padding: 100px 48px 60px;
       border-bottom: 1px solid var(--border);
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(20px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    section.visible { opacity: 1; transform: translateY(0); }
 
-    .section-inner {
-      max-width: 760px;
-      width: 100%;
-    }
+    .section-inner { max-width: 860px; width: 100%; }
 
-    /* ── TYPOGRAPHY ── */
+    /* ── TYPE ── */
     .eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.25em;
+      font-size: 10px;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--teal);
       margin-bottom: 20px;
@@ -96,78 +88,192 @@
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(42px, 7vw, 80px);
+      font-size: clamp(44px, 7vw, 82px);
       font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 28px;
+      line-height: 1.08;
+      margin-bottom: 0;
     }
 
     h2 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(30px, 5vw, 52px);
+      font-size: clamp(28px, 4vw, 48px);
       font-weight: 400;
       line-height: 1.2;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     .body-text {
-      font-size: 17px;
+      font-size: 16px;
       line-height: 1.8;
       font-weight: 300;
-      color: rgba(245,245,240,0.85);
-      max-width: 600px;
+      color: rgba(245,245,240,0.82);
+      max-width: 620px;
     }
-
-    .body-text p { margin-bottom: 20px; }
-    .body-text p:last-child { margin-bottom: 0; }
 
     .teal { color: var(--teal); }
-    .teal-italic { color: var(--teal); font-style: italic; font-family: 'Playfair Display', serif; }
-
-    /* ── BUTTON ── */
-    .btn {
-      display: inline-block;
-      margin-top: 40px;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--bg);
-      background: var(--teal);
-      padding: 16px 40px;
-      transition: opacity 0.2s;
-    }
-
-    .btn:hover { opacity: 0.85; }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--teal);
-      border: 1px solid var(--teal);
-      padding: 14px 38px;
-    }
-
-    .btn-outline:hover {
-      background: var(--teal);
-      color: var(--bg);
-      opacity: 1;
-    }
 
     /* ── S1 HOOK ── */
-    #s1 { position: relative; }
-
     #s1 .sub {
-      font-size: 14px;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      margin-bottom: 14px;
       font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    /* ── S2 SPLIT TABLE ── */
+    .split-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 40px;
+      border: 1px solid var(--border-teal);
+    }
+
+    .split-col {
+      padding: 32px;
+    }
+
+    .split-col:first-child {
+      border-right: 1px solid var(--border-teal);
+    }
+
+    .split-col-head {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
+    }
+
+    .split-col ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .split-col ul li {
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 300;
+      color: rgba(245,245,240,0.8);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .split-col ul li:last-child { border-bottom: none; }
+
+    /* ── S3 TIMELINE ── */
+    .timeline {
+      margin-top: 44px;
+      position: relative;
+    }
+
+    .timeline-track {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--border-teal);
+    }
+
+    .tl-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      padding-top: 36px;
+    }
+
+    .tl-dot {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--border-teal);
+      border: 1px solid var(--teal);
+    }
+
+    .tl-step.active .tl-dot {
+      background: var(--bg);
+      border: 2px solid var(--teal);
+      box-shadow: 0 0 10px rgba(78,205,196,0.4);
+    }
+
+    .tl-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .tl-step.active .tl-label { color: var(--white); }
+
+    .tl-sub {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .timeline-bracket {
+      margin-top: 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    .bracket-empty { flex: 3; }
+
+    .bracket-label {
+      flex: 4;
+      border-top: 2px solid var(--teal);
+      padding-top: 10px;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .bracket-invisible {
+      flex: 3;
+      border-top: 2px solid rgba(255,255,255,0.15);
+      padding-top: 10px;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── S4 STAT ── */
+    #s4 .stat-block {
+      margin-top: 20px;
+    }
+
+    .stat-line {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 3.5vw, 38px);
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--white);
+    }
+
+    .stat-line .teal-italic {
+      color: var(--teal);
       font-style: italic;
     }
 
-    /* ── S5 DELIVERABLES TWO-COL ── */
+    /* ── S5 DELIVERABLES ── */
     .deliverables-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -196,73 +302,93 @@
     }
 
     /* ── S6 WHO I AM ── */
-    #s6 .name-block {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(36px, 5vw, 58px);
-      font-weight: 400;
-      line-height: 1.15;
+    .pull-quotes {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .pull-quote {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 24px;
+      align-items: start;
+      border-left: 1px solid var(--border-teal);
+      padding-left: 24px;
+    }
+
+    .pq-company {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
       color: var(--teal);
-      font-style: italic;
-      margin-bottom: 28px;
+      padding-top: 3px;
+      line-height: 1.5;
+    }
+
+    .pq-date {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .pq-text {
+      font-size: 15px;
+      line-height: 1.7;
+      font-weight: 300;
+      color: rgba(245,245,240,0.85);
     }
 
     /* ── S7 THE ASK ── */
     #s7 blockquote {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(22px, 3.5vw, 36px);
+      font-size: clamp(22px, 3.5vw, 38px);
       font-weight: 400;
       font-style: italic;
-      line-height: 1.4;
+      line-height: 1.45;
       color: var(--white);
-      border-left: 2px solid var(--teal);
-      padding-left: 28px;
-      margin-bottom: 0;
+      max-width: 700px;
     }
 
     /* ── S8 RESUME ── */
-    #s8 .resume-label {
+    .btn-outline {
+      display: inline-block;
+      margin-top: 36px;
+      font-family: 'Inter', sans-serif;
       font-size: 11px;
-      letter-spacing: 0.25em;
+      font-weight: 500;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 16px;
+      text-decoration: none;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+      padding: 14px 38px;
+      transition: background 0.2s, color 0.2s;
     }
 
-    /* ── SCROLL INDICATOR ── */
-    .scroll-hint {
-      position: fixed;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      z-index: 50;
-      animation: fade-hint 3s ease 1.5s forwards;
-      opacity: 0;
-    }
-
-    @keyframes fade-hint {
-      0% { opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; }
-    }
+    .btn-outline:hover { background: var(--teal); color: var(--bg); }
 
     /* ── MOBILE ── */
     @media (max-width: 680px) {
       nav { padding: 16px 24px; }
       section { padding: 90px 24px 50px; }
+      .split-table { grid-template-columns: 1fr; }
+      .split-col:first-child { border-right: none; border-bottom: 1px solid var(--border-teal); }
       .deliverables-grid { grid-template-columns: 1fr; gap: 32px; }
+      .pull-quote { grid-template-columns: 1fr; gap: 8px; }
+      .timeline-track { flex-direction: column; gap: 16px; }
+      .timeline-track::before { display: none; }
+      .tl-step { text-align: left; padding-top: 0; padding-left: 24px; }
+      .tl-dot { top: 4px; left: 0; transform: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo" style="text-decoration:none;">The Layer</a>
+    <a href="index.html" class="nav-logo">The Layer</a>
     <a href="index.html" class="nav-back">← Back to the letter</a>
   </nav>
 
@@ -272,7 +398,6 @@
       <div class="eyebrow">For Lara · USESI</div>
       <p class="sub">A note from Micaila Vaughn</p>
       <h1>The layer<br/><span class="teal">USESI is missing.</span></h1>
-
     </div>
   </section>
 
@@ -280,10 +405,24 @@
   <section id="s2">
     <div class="section-inner">
       <div class="eyebrow">The Problem</div>
-      <h2>Lighting is where<br/>the translation breaks down.</h2>
-      <div class="body-text">
-        <p>The spec process doesn't move like the rest of the electrical portfolio. A project lives in conversations, submittals, and relationships for months before it touches a system.</p>
-        <p>Organizations are investing heavily in infrastructure that misses — because no one translated the actual work first.</p>
+      <h2>Lighting doesn't move like<br/>the rest of the portfolio.</h2>
+      <div class="split-table">
+        <div class="split-col">
+          <div class="split-col-head">How electrical moves</div>
+          <ul>
+            <li>SKU-based, transactional</li>
+            <li>Short cycle — quote to close in days</li>
+            <li>System-visible from the start</li>
+          </ul>
+        </div>
+        <div class="split-col">
+          <div class="split-col-head">How lighting actually moves</div>
+          <ul>
+            <li>Spec-driven, relationship-dependent</li>
+            <li>Months of conversations before a PO</li>
+            <li>Lives outside the system until the end</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -293,9 +432,38 @@
     <div class="section-inner">
       <div class="eyebrow">The Gap</div>
       <h2>The decisions that drive margin<br/>happen before anyone opens a system.</h2>
-      <div class="body-text">
-        <p>Which manufacturers delivered, performed, and negotiated their best terms. Which procurement model closed most profitably. Whether the rep relationship protected the deal or complicated it.</p>
-        <p>That intelligence exists — it's living in people's heads instead of anywhere it can be used. <span class="teal">And that's only the middle of the problem.</span></p>
+      <div class="timeline">
+        <div class="timeline-track">
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="tl-label">Spec</div>
+            <div class="tl-sub">Conversations,<br/>relationships</div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="tl-label">Submittal</div>
+            <div class="tl-sub">Approvals,<br/>back-and-forth</div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-dot"></div>
+            <div class="tl-label">Award</div>
+            <div class="tl-sub">Margin decisions,<br/>rep dynamics</div>
+          </div>
+          <div class="tl-step active">
+            <div class="tl-dot"></div>
+            <div class="tl-label">PO</div>
+            <div class="tl-sub">Eclipse<br/>starts here</div>
+          </div>
+          <div class="tl-step active">
+            <div class="tl-dot"></div>
+            <div class="tl-label">Delivery</div>
+            <div class="tl-sub">Transaction<br/>recorded</div>
+          </div>
+        </div>
+        <div class="timeline-bracket">
+          <div class="bracket-invisible">invisible to any system</div>
+          <div class="bracket-label">Eclipse covers this</div>
+        </div>
       </div>
     </div>
   </section>
@@ -304,10 +472,11 @@
   <section id="s4">
     <div class="section-inner">
       <div class="eyebrow">The Role</div>
-      <h2>This isn't one company's overhead.<br/>It's infrastructure for the whole portfolio.</h2>
-      <div class="body-text">
-        <p>USESI has 14 companies. The lighting gap isn't unique to one of them. The cost of building this right is shared. The return compounds across all of them.</p>
-        <p>What's needed is someone who sits between the systems being built and the operations they need to serve.</p>
+      <div class="stat-block">
+        <div class="stat-line">1 role.</div>
+        <div class="stat-line">14 companies.</div>
+        <div class="stat-line"><span class="teal-italic">The cost is shared.</span></div>
+        <div class="stat-line"><span class="teal-italic">The return compounds.</span></div>
       </div>
     </div>
   </section>
@@ -324,7 +493,7 @@
         </div>
         <div class="deliverable-card">
           <div class="num">02</div>
-          <p>A data layer built around the activity that's already happening — so pipeline, margin, and project status surface as a byproduct of doing the work, not as a separate reporting burden. Leadership sees across the portfolio. Sales people see what's worth chasing.</p>
+          <p>A data layer built around activity that's already happening — so pipeline, margin, and project status surface as a byproduct of doing the work, not as a separate reporting burden. Leadership sees across the portfolio. Sales people see what's worth chasing.</p>
         </div>
       </div>
     </div>
@@ -334,10 +503,36 @@
   <section id="s6">
     <div class="section-inner">
       <div class="eyebrow">Who I Am</div>
-      <div class="name-block">Twenty years<br/>inside lighting.</div>
-      <div class="body-text">
-        <p>Manufacturing, rep networks, regional sales. Teloric, Coronet LED, Luxxbox, Visual Interest, Pure Lighting.</p>
-        <p>I understand the work before the system — and the system that needs to serve it. <span class="teal-italic">That's the layer that's missing.</span></p>
+      <h2>Twenty years inside lighting.</h2>
+      <div class="pull-quotes">
+        <div class="pull-quote">
+          <div>
+            <div class="pq-company">Pure Lighting</div>
+            <div class="pq-date">2007 – 2011</div>
+          </div>
+          <div class="pq-text">Built a boutique rep agency from scratch — 200+ accounts, every client type in the channel. Grew it to a successful merger.</div>
+        </div>
+        <div class="pull-quote">
+          <div>
+            <div class="pq-company">Visual Interest</div>
+            <div class="pq-date">2011 – 2017</div>
+          </div>
+          <div class="pq-text">Top-producing salesperson six consecutive years. Created SparkLab — still running 10 years later, widely referenced, widely copied.</div>
+        </div>
+        <div class="pull-quote">
+          <div>
+            <div class="pq-company">Luxxbox</div>
+            <div class="pq-date">2019 – 2021</div>
+          </div>
+          <div class="pq-text">Grew U.S. revenue 35% for an unknown international brand — built the rep network and the go-to-market from nothing.</div>
+        </div>
+        <div class="pull-quote">
+          <div>
+            <div class="pq-company">Coronet</div>
+            <div class="pq-date">2021 – 2026</div>
+          </div>
+          <div class="pq-text">Doubled territory. Built AI-powered onboarding and training programs. Surfaced a knowledge gap their own ERP couldn't see.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -350,7 +545,7 @@
     </div>
   </section>
 
-  <!-- S8 · THE RESUME -->
+  <!-- S8 · RESUME -->
   <section id="s8">
     <div class="section-inner">
       <div class="eyebrow">The Resume</div>
@@ -358,24 +553,19 @@
       <div class="body-text">
         <p>Twenty years. The work, the companies, the results.</p>
       </div>
-      <a href="Micaila-Vaughn-Resume.pdf" class="btn btn-outline" target="_blank">View Resume</a>
+      <a href="Micaila-Vaughn-Resume.pdf" class="btn-outline" target="_blank">View Resume</a>
     </div>
   </section>
 
-  <div class="scroll-hint">Scroll to explore</div>
-
   <script>
-    // Intersection observer for fade-in
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, { threshold: 0.15 });
-
+    }, { threshold: 0.12 });
     sections.forEach(s => observer.observe(s));
   </script>
+
 </body>
 </html>
