@@ -198,6 +198,50 @@
       color: var(--bg);
     }
 
+    /* ── POST-LETTER CTA ── */
+    .post-letter {
+      margin-top: 56px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .post-letter a.btn-primary {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--teal);
+      padding: 14px 32px;
+      transition: opacity 0.2s;
+    }
+
+    .post-letter a.btn-primary:hover { opacity: 0.85; }
+
+    .post-letter a.btn-secondary {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+      padding: 13px 30px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .post-letter a.btn-secondary:hover {
+      background: var(--teal);
+      color: var(--bg);
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 600px) {
       nav { padding: 16px 20px; }
@@ -252,6 +296,11 @@
       <div class="signature">
         <div class="name">Micaila</div>
         <div class="contact">303.981.7338</div>
+      </div>
+
+      <div class="post-letter">
+        <a href="index.html" class="btn-primary">See the full picture</a>
+        <a href="Micaila-Vaughn-Resume.pdf" target="_blank" class="btn-secondary">View Resume</a>
       </div>
 
     </div>
