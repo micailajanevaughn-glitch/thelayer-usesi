@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Note from Micaila Vaughn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --teal: #4ecdc4;
+      --white: #f5f5f0;
+      --muted: #888;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .nav-right {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── MAIN LETTER WRAPPER ── */
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 140px 40px 80px;
+    }
+
+    /* ── EYEBROW ── */
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 48px;
+    }
+
+    /* ── LETTER BODY ── */
+    .letter {
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.8;
+      font-weight: 300;
+      color: var(--white);
+    }
+
+    .letter p {
+      margin-bottom: 28px;
+    }
+
+    .letter p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    /* salutation */
+    .letter .salutation {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 36px;
+      color: var(--white);
+    }
+
+    /* key line emphasis */
+    .letter .key-line {
+      color: var(--teal);
+      font-style: italic;
+    }
+
+    /* deliverables */
+    .deliverables {
+      margin: 36px 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .deliverables li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 0 16px;
+      margin-bottom: 28px;
+      font-size: 16px;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .deliverables li .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      color: var(--teal);
+      padding-top: 3px;
+      font-style: italic;
+    }
+
+    /* signature */
+    .signature {
+      margin-top: 52px;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    .signature .name {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .signature .contact {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-top: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--teal);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-brand span {
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    .footer-resume {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      text-decoration: none;
+      border: 1px solid var(--teal);
+      padding: 8px 18px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .footer-resume:hover {
+      background: var(--teal);
+      color: var(--bg);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      main { padding: 110px 24px 80px; }
+      .letter { font-size: 16px; }
+      footer { padding: 14px 20px; }
+      .footer-brand span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">The Layer</a>
+    <span class="nav-right">For Lara · USESI</span>
+  </nav>
+
+  <!-- LETTER -->
+  <main>
+    <div class="eyebrow">A note from Micaila Vaughn</div>
+
+    <div class="letter">
+
+      <p class="salutation">Lara —</p>
+
+      <p>You asked for my resume — here it is. I wanted to sit with what you're actually navigating before putting something in front of you. I was at SXSW last week in the AI and emerging tech sessions, and the same pattern kept surfacing: organizations investing heavily in infrastructure that misses because no one translated the actual work first.</p>
+
+      <p><span class="key-line">Lighting is where that translation breaks down inside USESI.</span></p>
+
+      <p>The spec process doesn't move like the rest of the electrical portfolio. A project lives in conversations, submittals, and relationships for months before it touches a system. The decisions that drive margin happen before anyone opens a system — and right now, none of that is visible. You don't know which manufacturers delivered, performed, and negotiated their best pricing and terms. You don't know which procurement model closed most profitably. You don't know whether the rep relationship protected the deal or complicated it. That intelligence exists — it's just living in people's heads instead of anywhere it can be used. <span class="key-line">And that's only the middle of the problem.</span></p>
+
+      <p>My brother spent 20 years building and scaling complex project operations. He says it plainly: a system is only as useful as the people using it. If it hasn't been built around how they actually work, it never gets off the ground. It never flourishes.</p>
+
+      <p>What I'd contribute — sitting between the systems being built and the operations they need to serve — two things:</p>
+
+      <ul class="deliverables">
+        <li>
+          <span class="num">01</span>
+          <span>A knowledge and training system built around how lighting actually gets sold, specified, and delivered — so that institutional knowledge becomes searchable and repeatable instead of walking out the door with the next retirement.</span>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <span>A data layer built around the activity that's already happening — so pipeline, margin, and project status surface as a byproduct of doing the work, not as a separate reporting burden. When that's in place, leadership sees across the portfolio. Sales people see what's worth chasing. The investment already made starts to work.</span>
+        </li>
+      </ul>
+
+      <p>Twenty years inside lighting — manufacturing, rep networks, regional sales. I understand the work before the system and the system that needs to serve it. <span class="key-line">That's the layer that's missing.</span></p>
+
+      <p>I'm back and would love to keep working with you on how we shape and scale this together.</p>
+
+      <div class="signature">
+        <div class="name">Micaila</div>
+        <div class="contact">303.981.7338</div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      The Layer <span>USESI · MICAILA VAUGHN</span>
+    </div>
+    <a class="footer-resume" href="Micaila-Vaughn-Resume.pdf" target="_blank">View Resume</a>
+  </footer>
+
+</body>
+</html>
