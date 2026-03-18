@@ -341,15 +341,23 @@
       color: rgba(245,245,240,0.85);
     }
 
-    /* ── S7 THE ASK ── */
-    #s7 blockquote {
+    /* ── S7 THE CLOSE ── */
+    .close-text {
+      max-width: 680px;
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    .close-text p { margin-bottom: 22px; }
+    .close-text p:last-child { margin-bottom: 0; }
+
+    .close-line {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(22px, 3.5vw, 38px);
-      font-weight: 400;
+      font-size: clamp(18px, 2.5vw, 26px) !important;
       font-style: italic;
+      color: var(--teal) !important;
       line-height: 1.45;
-      color: var(--white);
-      max-width: 700px;
+      margin-top: 12px;
     }
 
     /* ── S8 RESUME ── */
@@ -537,11 +545,18 @@
     </div>
   </section>
 
-  <!-- S7 · THE ASK -->
+  <!-- S7 · THE CLOSE -->
   <section id="s7">
     <div class="section-inner">
-      <div class="eyebrow">The Ask</div>
-      <blockquote>I'm back and would love to keep working with you on how we shape and scale this together.</blockquote>
+      <div class="eyebrow">The Moment</div>
+      <div class="body-text close-text">
+        <p>Wiedenbach Brown has already built something rare. A platform, a reputation, and a way of operating that others have spent decades trying to replicate.</p>
+        <p>They pioneered national account lighting in 1960. No one else saw it yet. That instinct to move first — to recognize where the market was going before it could name it — that's the DNA of this organization.</p>
+        <p>110 years later, the move hasn't changed. The channel is shifting. The intelligence behind every deal, every spec, every relationship now needs to operate differently — connected, visible, and scalable.</p>
+        <p>This is bigger than WB. This is a defining moment for USESI. Fourteen companies at an inflection point — where the next move determines who leads and who gets left behind.</p>
+        <p>The momentum is already here.</p>
+        <p class="close-line">The only question is — are you ready to build it, or be built by it?</p>
+      </div>
     </div>
   </section>
 
