@@ -50,12 +50,16 @@
       color: var(--teal);
     }
 
-    .nav-label {
+    .nav-back {
+      font-family: 'Inter', sans-serif;
       font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      letter-spacing: 0.12em;
       color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
     }
+
+    .nav-back:hover { color: var(--teal); }
 
     /* ── SECTIONS ── */
     section {
@@ -258,8 +262,8 @@
 
   <!-- NAV -->
   <nav>
-    <span class="nav-logo">The Layer</span>
-    <span class="nav-label">For Lara · USESI</span>
+    <a href="index.html" class="nav-logo" style="text-decoration:none;">The Layer</a>
+    <a href="index.html" class="nav-back">← Back to the letter</a>
   </nav>
 
   <!-- S1 · HOOK -->
