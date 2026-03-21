@@ -20,6 +20,11 @@
 
     html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
 
+    @media (max-width: 768px) {
+      html { scroll-snap-type: none; }
+      section { scroll-snap-align: none; }
+    }
+
     body {
       background: var(--bg);
       color: var(--white);
