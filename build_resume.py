@@ -146,46 +146,27 @@ story.append(HRFlowable(width="100%", thickness=1.5, color=TEAL, spaceAfter=10))
 story.append(Paragraph("PROFESSIONAL EXPERIENCE", s_section))
 story.append(section_rule())
 
-# ── Job entry helper ──
+# ── Job entry helper — stacked layout ──
 def job(date, company, location, title, bullets):
-    # Two-col: left = date/company/location, right = title + bullets
-    left_content = [
-        Paragraph(date, s_date),
-        Spacer(1, 2),
-        Paragraph(company, s_company),
-        Spacer(1, 1),
-        Paragraph(location, s_location),
-    ]
-    right_content = [Paragraph(title, s_jobtitle), Spacer(1, 4)]
-    for b in bullets:
-        right_content.append(bullet(b))
-
     from reportlab.platypus import KeepTogether
-    left_col = left_content
-    right_col = right_content
-
-    # Build as table
-    left_para = []
-    for item in left_content:
-        left_para.append(item)
-
-    right_para = []
-    for item in right_content:
-        right_para.append(item)
-
-    from reportlab.platypus import KeepInFrame
-    lf = KeepInFrame(1.5*inch, 400, left_para, mode='shrink')
-    rf = KeepInFrame(5.2*inch, 400, right_para, mode='shrink')
-
-    t = Table([[lf, rf]], colWidths=[1.5*inch, 5.2*inch])
-    t.setStyle(TableStyle([
-        ('VALIGN', (0,0), (-1,-1), 'TOP'),
+    # Header row: company left, date right
+    header = Table(
+        [[Paragraph(f'<b>{company}</b> <font color="#888888" size="8">· {location}</font>', ParagraphStyle('jh', fontName=FONT_BOLD, fontSize=10, leading=13, textColor=colors.HexColor('#1a1a1a'))),
+          Paragraph(date, ParagraphStyle('dr', fontName=FONT, fontSize=8.5, leading=13, textColor=MUTED, alignment=2))]],
+        colWidths=[4.8*inch, 2.0*inch]
+    )
+    header.setStyle(TableStyle([
+        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
         ('LEFTPADDING', (0,0), (-1,-1), 0),
-        ('RIGHTPADDING', (0,0), (-1,-1), 6),
+        ('RIGHTPADDING', (0,0), (-1,-1), 0),
         ('TOPPADDING', (0,0), (-1,-1), 0),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 6),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 2),
     ]))
-    story.append(t)
+    block = [header, Paragraph(title, ParagraphStyle('jt', fontName=FONT_BOLD, fontSize=9.5, leading=13, textColor=TEAL, spaceAfter=3))]
+    for b in bullets:
+        block.append(bullet(b))
+    block.append(Spacer(1, 8))
+    story.append(KeepTogether(block))
 
 job("Feb 2026 — Present", "Teloric", "Denver, CO", "Founder / Principal Consultant", [
     "Identified the gap between AI/BI capability and real-world operations — building systems, training frameworks, and infrastructure that deliver immediate ROI and position organizations to compete for the next generation of clients and talent",
@@ -271,33 +252,27 @@ story.append(section_rule())
 
 vol_entries = [
     ("WILD Denver", "Board Member", "Jan 2021 — Present"),
-    ("WILD", "Systems Alchemist & Mentorship Program Liaison", "Jul 2024 — Present"),
+    ("WILD — Women in Lighting & Design National", "AI Integration & Tools Lead", "Jul 2024 — Present"),
     ("A Little Help", "Technology Assistance for Elderly", "Apr 2023 — Present"),
     ("Brilliance Awards", "Brand Development & Marketing", "Feb 2015 — Nov 2017"),
-    ("Women in Design", "Director of Social Media — Women in Design Denver", "Jan 2012 — Apr 2014"),
+    ("Women in Design Denver", "Director of Social Media", "Jan 2012 — Apr 2014"),
 ]
 
 for org, role, dates in vol_entries:
-    vol_left = [
-        Paragraph(dates, s_date),
-        Spacer(1, 2),
-        Paragraph(org, s_company),
-    ]
-    vol_right = [
-        Paragraph(role, s_jobtitle),
-    ]
-    from reportlab.platypus import KeepInFrame
-    lf = KeepInFrame(1.5*inch, 100, vol_left, mode='shrink')
-    rf = KeepInFrame(5.2*inch, 100, vol_right, mode='shrink')
-    t = Table([[lf, rf]], colWidths=[1.5*inch, 5.2*inch])
-    t.setStyle(TableStyle([
-        ('VALIGN', (0,0), (-1,-1), 'TOP'),
+    vol_row = Table(
+        [[Paragraph(f'<b>{org}</b>', ParagraphStyle('vh', fontName=FONT_BOLD, fontSize=9.5, leading=13, textColor=TEAL)),
+          Paragraph(dates, ParagraphStyle('vd', fontName=FONT, fontSize=8.5, leading=13, textColor=MUTED, alignment=2))]],
+        colWidths=[4.8*inch, 2.0*inch]
+    )
+    vol_row.setStyle(TableStyle([
+        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
         ('LEFTPADDING', (0,0), (-1,-1), 0),
-        ('RIGHTPADDING', (0,0), (-1,-1), 6),
+        ('RIGHTPADDING', (0,0), (-1,-1), 0),
         ('TOPPADDING', (0,0), (-1,-1), 0),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 2),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 1),
     ]))
-    story.append(t)
+    story.append(vol_row)
+    story.append(Paragraph(role, ParagraphStyle('vr', fontName=FONT, fontSize=9, leading=12, textColor=BLACK, spaceAfter=5)))
 
 story.append(Spacer(1, 2))
 
