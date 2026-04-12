@@ -1,127 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Layer · USESI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teloric × USESI · Strategic Briefing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0d0d0d;
+    color: #f5f5f3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
 
-    :root {
-      --bg: #0d0d0d;
-      --teal: #4ecdc4;
-      --white: #f5f5f0;
-      --muted: #666;
-      --border: rgba(255,255,255,0.08);
-    }
+  .bg-glow { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(62,207,191,0.05) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: pulse 7s ease-in-out infinite; pointer-events: none; }
+  @keyframes pulse { 0%, 100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.12); } }
 
-    html, body {
-      width: 100%; height: 100%;
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      overflow: hidden;
-    }
+  .fade-in { opacity: 0; transform: translateY(16px); animation: fadeUp 0.8s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .d1 { animation-delay: 0.1s; } .d2 { animation-delay: 0.4s; } .d3 { animation-delay: 0.7s; } .d4 { animation-delay: 1.0s; } .d5 { animation-delay: 1.4s; } .d6 { animation-delay: 1.8s; }
 
-    /* ── SPLASH ── */
-    .splash {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 48px;
-      position: relative;
-    }
+  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: #6a6a66; margin-bottom: 48px; }
+  .eyebrow span { color: #3ecfbf; }
 
-    /* subtle grid texture */
-    .splash::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(78,205,196,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(78,205,196,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-    }
+  .headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 5vw, 58px); font-weight: 500; line-height: 1.15; color: #f5f5f3; max-width: 720px; margin-bottom: 10px; }
+  .headline em { font-style: italic; color: #3ecfbf; }
 
-    .eyebrow {
-      font-size: 10px;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 32px;
-      opacity: 0;
-      animation: fade-up 0.8s ease 0.3s forwards;
-    }
+  .rule { width: 44px; height: 1px; background: #3ecfbf; margin: 28px auto; opacity: 0.35; }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(42px, 7vw, 86px);
-      font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 48px;
-      opacity: 0;
-      animation: fade-up 0.8s ease 0.6s forwards;
-    }
+  .sub { font-size: clamp(14px, 1.8vw, 16px); line-height: 1.8; color: rgba(255,255,255,0.42); max-width: 500px; margin: 0 auto 48px; }
 
-    h1 .teal { color: var(--teal); }
+  .cta { display: inline-block; background: #3ecfbf; color: #0d0d0d; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; padding: 16px 44px; transition: background 0.25s, transform 0.2s; }
+  .cta:hover { background: #f5f5f3; transform: translateY(-2px); }
 
-    .btn {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--bg);
-      background: var(--teal);
-      padding: 16px 48px;
-      transition: opacity 0.2s;
-      opacity: 0;
-      animation: fade-up 0.8s ease 1s forwards;
-    }
+  .byline { margin-top: 32px; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: #6a6a66; }
 
-    .btn:hover { opacity: 0.85; }
-
-    .from {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 13px;
-      color: var(--muted);
-      white-space: nowrap;
-      opacity: 0;
-      animation: fade-up 0.8s ease 1.3s forwards;
-    }
-
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .splash { padding: 32px 24px; }
-      h1 { font-size: 38px; }
-    }
-  </style>
+  .teal-line { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #3ecfbf, transparent); opacity: 0.2; }
+</style>
 </head>
 <body>
+  <div class="bg-glow"></div>
+  <div class="teal-line"></div>
 
-  <div class="splash">
-    <div class="eyebrow">For Lara · USESI</div>
-    <h1>The layer<br/><span class="teal">USESI is missing.</span></h1>
-    <a href="letter.html" class="btn">Read the note</a>
-    <div class="from">A note from Micaila Vaughn</div>
-  </div>
+  <div class="eyebrow fade-in d1">For USESI Leadership · <span>A Teloric Proposal</span></div>
 
+  <h1 class="headline fade-in d2">The engine is in place.<br><em>The translation is the missing piece.</em></h1>
+
+  <div class="rule fade-in d3"></div>
+
+  <p class="sub fade-in d4">USESI has built world-class digital infrastructure through the Shared Services Group. What's missing is the bridge between that investment and the operational reality of 14 regional lighting companies — from Electrical Wholesalers in New England to Walters in California.</p>
+
+  <a href="site.html" class="cta fade-in d5">Read the Briefing</a>
+
+  <div class="byline fade-in d6">Micaila Vaughn · Founder, Teloric</div>
 </body>
 </html>

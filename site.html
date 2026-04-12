@@ -1,601 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Layer · USESI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teloric × USESI · Executive Briefing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #111111; color: #f5f5f3; font-weight: 300; }
 
-    :root {
-      --bg: #0d0d0d;
-      --teal: #4ecdc4;
-      --white: #f5f5f0;
-      --muted: #888;
-      --muted-light: rgba(245,245,240,0.5);
-      --border: rgba(255,255,255,0.08);
-      --border-teal: rgba(78,205,196,0.25);
-    }
+  .nav { position: fixed; top: 0; left: 0; right: 0; padding: 18px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(17,17,17,0.96); border-bottom: 1px solid #1e1e1e; z-index: 100; backdrop-filter: blur(8px); }
+  .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600; color: #3ecfbf; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+  .nav-right { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6a6a66; }
 
-    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+  /* HERO */
+  .hero { padding: 120px 48px 64px; max-width: 820px; margin: 0 auto; border-bottom: 1px solid #1e1e1e; }
+  .hero-label { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #3ecfbf; margin-bottom: 20px; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 4vw, 46px); font-weight: 500; line-height: 1.15; color: #f5f5f3; margin-bottom: 20px; }
+  .hero-title em { font-style: italic; color: #3ecfbf; }
+  .hero-sub { font-size: 15px; line-height: 1.82; color: rgba(255,255,255,0.5); max-width: 600px; }
 
-    @media (max-width: 768px) {
-      html { scroll-snap-type: none; }
-      section { scroll-snap-align: none; }
-    }
+  /* SECTIONS */
+  .section { max-width: 820px; margin: 0 auto; padding: 56px 48px; border-bottom: 1px solid #1e1e1e; }
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #3ecfbf; margin-bottom: 16px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3vw, 30px); font-weight: 500; line-height: 1.2; color: #f5f5f3; margin-bottom: 22px; }
+  p { font-size: 14.5px; line-height: 1.85; color: rgba(255,255,255,0.58); margin-bottom: 18px; }
+  p:last-child { margin-bottom: 0; }
 
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
+  /* OPENING LETTER */
+  .letter { max-width: 820px; margin: 0 auto; padding: 56px 48px; border-bottom: 1px solid #1e1e1e; }
+  .letter-to { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6a6a66; margin-bottom: 10px; }
+  .letter-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 3.2vw, 34px); font-weight: 500; line-height: 1.2; color: #f5f5f3; margin-bottom: 32px; }
+  .letter p { font-size: 15px; line-height: 1.88; color: rgba(255,255,255,0.65); margin-bottom: 22px; }
+  .letter p strong { color: rgba(255,255,255,0.88); font-weight: 500; }
+  .letter-sig { margin-top: 36px; padding-top: 24px; border-top: 1px solid #1e1e1e; }
+  .letter-sig-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: #f5f5f3; margin-bottom: 3px; }
+  .letter-sig-title { font-size: 11px; color: #6a6a66; letter-spacing: 0.1em; text-transform: uppercase; }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 48px;
-      background: rgba(13,13,13,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
+  /* TRANSLATION GAP */
+  .gap-visual { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0; margin: 28px 0; align-items: center; }
+  .gap-side { border: 1px solid #1e1e1e; padding: 22px 20px; background: #0d0d0d; border-radius: 2px; }
+  .gap-side-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #3ecfbf; margin-bottom: 8px; }
+  .gap-side-title { font-size: 14px; font-weight: 500; color: #f5f5f3; margin-bottom: 6px; }
+  .gap-side-text { font-size: 12px; color: rgba(255,255,255,0.38); line-height: 1.6; margin: 0; }
+  .gap-arrow { text-align: center; color: #3ecfbf; font-size: 20px; opacity: 0.4; }
+  .gap-middle { background: rgba(62,207,191,0.08); border: 1px solid rgba(62,207,191,0.2); padding: 22px 20px; border-radius: 2px; text-align: center; }
+  .gap-middle-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #3ecfbf; margin-bottom: 8px; }
+  .gap-middle-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: #f5f5f3; margin: 0; }
 
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 13px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--teal);
-      text-decoration: none;
-    }
+  /* PILLARS */
+  .pillar { border: 1px solid #1e1e1e; border-radius: 2px; overflow: hidden; margin: 18px 0; }
+  .pillar-header { background: #0d0d0d; padding: 20px 26px; display: flex; align-items: flex-start; gap: 14px; border-bottom: 1px solid #1e1e1e; }
+  .pillar-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500; color: #3ecfbf; opacity: 0.3; line-height: 1; flex-shrink: 0; }
+  .pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: #f5f5f3; line-height: 1.2; }
+  .pillar-who { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(62,207,191,0.5); margin-top: 4px; }
+  .pillar-body { padding: 24px 26px; }
+  .pillar-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 16px; }
+  .pillar-outcomes { list-style: none; }
+  .pillar-outcomes li { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.65; padding: 7px 0; border-bottom: 1px solid #1a1a1a; display: flex; gap: 10px; }
+  .pillar-outcomes li:last-child { border-bottom: none; padding-bottom: 0; }
+  .pillar-outcomes li::before { content: '→'; color: #3ecfbf; flex-shrink: 0; font-size: 11px; margin-top: 2px; }
 
-    .nav-back {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-back:hover { color: var(--teal); }
+  /* HUB AND SPOKE */
+  .hub-box { background: #0d0d0d; border: 1px solid #1e1e1e; border-radius: 2px; padding: 24px 28px; margin: 28px 0; }
+  .hub-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #3ecfbf; margin-bottom: 14px; }
+  .hub-quote { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 14px; }
+  .hub-brands { display: flex; flex-wrap: wrap; gap: 8px; }
+  .hub-brand { font-size: 11px; color: rgba(255,255,255,0.4); border: 1px solid #1e1e1e; padding: 4px 12px; border-radius: 2px; letter-spacing: 0.06em; }
+  .hub-brand.highlight { color: #3ecfbf; border-color: rgba(62,207,191,0.3); }
 
-    /* ── SECTIONS ── */
-    section {
-      min-height: 100vh;
-      scroll-snap-align: start;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 100px 48px 60px;
-      border-bottom: 1px solid var(--border);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
+  /* STAT ROW */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 24px 0; }
+  .stat-card { background: #0d0d0d; border: 1px solid #1e1e1e; padding: 22px 18px; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 500; color: #3ecfbf; line-height: 1; margin-bottom: 8px; }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.28); line-height: 1.55; margin: 0; }
 
-    section.visible { opacity: 1; transform: translateY(0); }
+  /* ENGAGEMENT TIERS */
+  .tier { border: 1px solid #1e1e1e; border-radius: 2px; overflow: hidden; margin: 14px 0; }
+  .tier-header { background: #0d0d0d; padding: 18px 26px; border-bottom: 1px solid #1e1e1e; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .tier-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 500; color: #f5f5f3; }
+  .tier-tag { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: #3ecfbf; border: 1px solid rgba(62,207,191,0.3); padding: 4px 10px; border-radius: 2px; }
+  .tier-body { padding: 20px 26px; }
+  .tier-desc { font-size: 13.5px; color: rgba(255,255,255,0.55); line-height: 1.78; margin-bottom: 12px; }
+  .tier-outcome { font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #3ecfbf; margin-bottom: 5px; }
+  .tier-outcome-text { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: rgba(255,255,255,0.48); line-height: 1.6; margin: 0; }
 
-    .section-inner { max-width: 860px; width: 100%; }
+  /* TELORIC STANDARD */
+  .standard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+  .standard-card { border: 1px solid #1e1e1e; padding: 18px; border-radius: 2px; background: #0d0d0d; }
+  .standard-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #3ecfbf; margin-bottom: 7px; }
+  .standard-text { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.65; margin: 0; }
 
-    /* ── TYPE ── */
-    .eyebrow {
-      font-size: 10px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 20px;
-    }
+  /* WB CONNECTION */
+  .wb-box { border-left: 3px solid rgba(62,207,191,0.25); padding: 18px 22px; background: rgba(62,207,191,0.03); border-radius: 0 2px 2px 0; margin: 20px 0; }
+  .wb-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(62,207,191,0.45); margin-bottom: 7px; }
+  .wb-text { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; margin: 0; }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(44px, 7vw, 82px);
-      font-weight: 400;
-      line-height: 1.08;
-      margin-bottom: 0;
-    }
+  /* CLOSING */
+  .closing { max-width: 820px; margin: 0 auto; padding: 72px 48px; text-align: center; }
+  .closing-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 3.8vw, 42px); font-weight: 500; line-height: 1.2; color: #f5f5f3; margin-bottom: 14px; }
+  .closing-headline em { font-style: italic; color: #3ecfbf; }
+  .closing-sub { font-size: 14px; color: rgba(255,255,255,0.35); margin-bottom: 40px; line-height: 1.78; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .closing-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+  .cta-primary { display: inline-block; background: #3ecfbf; color: #0d0d0d; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; padding: 14px 36px; transition: background 0.2s, transform 0.2s; }
+  .cta-primary:hover { background: #f5f5f3; transform: translateY(-2px); }
+  .cta-secondary { display: inline-block; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.48); font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; padding: 14px 36px; transition: all 0.2s; }
+  .cta-secondary:hover { border-color: #3ecfbf; color: #3ecfbf; }
+  .closing-note { font-size: 11px; color: rgba(255,255,255,0.2); line-height: 1.7; font-style: italic; }
 
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 4vw, 48px);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 32px;
-    }
+  /* FOOTER */
+  .footer { background: #080808; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1a1a1a; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: #3ecfbf; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+  .footer-meta { font-size: 10px; color: #6a6a66; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 3px; }
+  .footer-resume { border: 1px solid #3ecfbf; color: #3ecfbf; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; padding: 8px 20px; transition: background 0.2s, color 0.2s; }
+  .footer-resume:hover { background: #3ecfbf; color: #0d0d0d; }
 
-    .body-text {
-      font-size: 16px;
-      line-height: 1.8;
-      font-weight: 300;
-      color: rgba(245,245,240,0.82);
-      max-width: 620px;
-    }
-
-    .teal { color: var(--teal); }
-
-    /* ── S1 HOOK ── */
-    #s1 .sub {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 15px;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-
-    /* ── S2 SPLIT TABLE ── */
-    .split-table {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      margin-top: 40px;
-      border: 1px solid var(--border-teal);
-    }
-
-    .split-col {
-      padding: 32px;
-    }
-
-    .split-col:first-child {
-      border-right: 1px solid var(--border-teal);
-    }
-
-    .split-col-head {
-      font-size: 10px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 20px;
-    }
-
-    .split-col ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .split-col ul li {
-      font-size: 14px;
-      line-height: 1.7;
-      font-weight: 300;
-      color: rgba(245,245,240,0.8);
-      padding: 6px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .split-col ul li:last-child { border-bottom: none; }
-
-    /* ── S3 TIMELINE ── */
-    .timeline {
-      margin-top: 44px;
-      position: relative;
-    }
-
-    .timeline-track {
-      display: flex;
-      align-items: flex-start;
-      gap: 0;
-      position: relative;
-    }
-
-    .timeline-track::before {
-      content: '';
-      position: absolute;
-      top: 16px;
-      left: 0; right: 0;
-      height: 1px;
-      background: var(--border-teal);
-    }
-
-    .tl-step {
-      flex: 1;
-      text-align: center;
-      position: relative;
-      padding-top: 36px;
-    }
-
-    .tl-dot {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: var(--border-teal);
-      border: 1px solid var(--teal);
-    }
-
-    .tl-step.active .tl-dot {
-      background: var(--bg);
-      border: 2px solid var(--teal);
-      box-shadow: 0 0 10px rgba(78,205,196,0.4);
-    }
-
-    .tl-label {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      font-weight: 500;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .tl-step.active .tl-label { color: var(--white); }
-
-    .tl-sub {
-      font-size: 10px;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    .timeline-bracket {
-      margin-top: 28px;
-      display: flex;
-      align-items: flex-start;
-      gap: 0;
-    }
-
-    .bracket-empty { flex: 3; }
-
-    .bracket-label {
-      flex: 4;
-      border-top: 2px solid var(--teal);
-      padding-top: 10px;
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--teal);
-    }
-
-    .bracket-invisible {
-      flex: 3;
-      border-top: 2px solid rgba(255,255,255,0.15);
-      padding-top: 10px;
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── S4 STAT ── */
-    #s4 .stat-block {
-      margin-top: 20px;
-    }
-
-    .stat-line {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(22px, 3.5vw, 38px);
-      font-weight: 400;
-      line-height: 1.4;
-      color: var(--white);
-    }
-
-    .stat-line .teal-italic {
-      color: var(--teal);
-      font-style: italic;
-    }
-
-    /* ── S5 DELIVERABLES ── */
-    .deliverables-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      margin-top: 36px;
-    }
-
-    .deliverable-card {
-      border-top: 1px solid var(--teal);
-      padding-top: 24px;
-    }
-
-    .deliverable-card .num {
-      font-family: 'Playfair Display', serif;
-      font-size: 13px;
-      font-style: italic;
-      color: var(--teal);
-      margin-bottom: 14px;
-    }
-
-    .deliverable-card p {
-      font-size: 15px;
-      line-height: 1.75;
-      font-weight: 300;
-      color: rgba(245,245,240,0.85);
-    }
-
-    /* ── S6 WHO I AM ── */
-    .pull-quotes {
-      margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .pull-quote {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 24px;
-      align-items: start;
-      border-left: 1px solid var(--border-teal);
-      padding-left: 24px;
-    }
-
-    .pq-company {
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--teal);
-      padding-top: 3px;
-      line-height: 1.5;
-    }
-
-    .pq-date {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 4px;
-      letter-spacing: 0.05em;
-    }
-
-    .pq-text {
-      font-size: 15px;
-      line-height: 1.7;
-      font-weight: 300;
-      color: rgba(245,245,240,0.85);
-    }
-
-    /* ── S7 THE CLOSE ── */
-    .close-text {
-      max-width: 680px;
-      font-size: 17px;
-      line-height: 1.85;
-    }
-
-    .close-text p { margin-bottom: 22px; }
-    .close-text p:last-child { margin-bottom: 0; }
-
-    .close-line {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(18px, 2.5vw, 26px) !important;
-      font-style: italic;
-      color: var(--teal) !important;
-      line-height: 1.45;
-      margin-top: 12px;
-    }
-
-    /* ── S8 RESUME ── */
-    .btn-outline {
-      display: inline-block;
-      margin-top: 36px;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--teal);
-      border: 1px solid var(--teal);
-      padding: 14px 38px;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .btn-outline:hover { background: var(--teal); color: var(--bg); }
-
-    /* ── MOBILE ── */
-    @media (max-width: 680px) {
-      nav { padding: 16px 24px; }
-      section { padding: 90px 24px 50px; }
-      .split-table { grid-template-columns: 1fr; }
-      .split-col:first-child { border-right: none; border-bottom: 1px solid var(--border-teal); }
-      .deliverables-grid { grid-template-columns: 1fr; gap: 32px; }
-      .pull-quote { grid-template-columns: 1fr; gap: 8px; }
-      .timeline-track { flex-direction: column; gap: 16px; }
-      .timeline-track::before { display: none; }
-      .tl-step { text-align: left; padding-top: 0; padding-left: 24px; }
-      .tl-dot { top: 4px; left: 0; transform: none; }
-    }
-  </style>
+  @media (max-width: 600px) {
+    .nav { padding: 14px 20px; }
+    .hero, .section, .letter, .closing { padding-left: 20px; padding-right: 20px; }
+    .gap-visual { grid-template-columns: 1fr; }
+    .gap-arrow { display: none; }
+    .stat-row { grid-template-columns: 1fr; }
+    .standard-grid { grid-template-columns: 1fr; }
+    .footer { padding: 18px 20px; }
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <a href="index.html" class="nav-logo">The Layer</a>
-    <a href="index.html" class="nav-back">← Back to the letter</a>
-  </nav>
+<nav class="nav">
+  <a href="index.html" class="nav-brand">Teloric × USESI</a>
+  <span class="nav-right">Strategic Briefing · Micaila Vaughn</span>
+</nav>
 
-  <!-- S1 · HOOK -->
-  <section id="s1">
-    <div class="section-inner">
-      <div class="eyebrow">For Lara · USESI</div>
-      <p class="sub">A note from Micaila Vaughn</p>
-      <h1>The layer<br/><span class="teal">USESI is missing.</span></h1>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Strategic Briefing · Teloric × USESI</div>
+  <h1 class="hero-title">Operationalizing the Digital Investment.<br><em>Bridging the gap between SSG strategy and branch reality.</em></h1>
+  <p class="hero-sub">USESI has built a world-class digital engine through the Shared Services Group. The opportunity now is ensuring that engine powers the operational reality of 14 regional companies — from the lighting desks at Wiedenbach Brown to the branch teams at Electrical Wholesalers, Walters, and Monarch.</p>
+</div>
+
+<!-- OPENING LETTER -->
+<div class="letter">
+  <div class="letter-to">To the USESI Executive Team</div>
+  <h2 class="letter-headline">The tools are in place. The translation is the missing piece.</h2>
+
+  <p>USESI has already made the critical investment. Through the Shared Services Group, the digital engine is built. The AI licenses are rolling out. The infrastructure is in place. That is the right move — and it positions USESI ahead of most organizations in this industry.</p>
+
+  <p>But there is a growing Translation Gap between the parent company's digital strategy and the daily operational reality of the 14 regional companies. Branch managers and lighting specialists are focused on protecting margin, managing complex projects, and moving deals from spec to submittal. They don't have the bandwidth to figure out how a generic AI tool fits into a lighting department workflow. Meanwhile, the most experienced people in the organization are retiring — and their decades of accumulated expertise are leaving the building with them.</p>
+
+  <p><strong>I am not an IT consultant. I am a 20-year lighting veteran</strong> who understands exactly how a deal moves from initial specification through value engineering, submittal, award, and delivery. My role is to serve as the Strategic Bridge between SSG's technical rollout and the operational ground truth of USESI's regional companies — ensuring that the investment already made actually delivers at the branch level.</p>
+
+  <p>The three outcomes this engagement drives: AI tools that lighting teams actually use. A Mentorship Architecture that captures veteran expertise before it retires. And a Visibility Layer that gives the parent company intelligence across all 14 companies that currently exists nowhere.</p>
+
+  <div class="letter-sig">
+    <div class="letter-sig-name">Micaila Vaughn</div>
+    <div class="letter-sig-title">Founder · Teloric · AI Systems Strategist · 20-Year Lighting Veteran</div>
+  </div>
+</div>
+
+<!-- THE TRANSLATION GAP -->
+<div class="section">
+  <div class="section-label">The Translation Gap</div>
+  <h2 class="section-title">A world-class digital engine. A branch-level adoption problem.</h2>
+
+  <p>Lighting distribution doesn't operate like the rest of the electrical portfolio. A lighting project lives in conversations, submittals, and manufacturer relationships for months before it ever touches a system. The decisions that drive margin happen before anyone opens a purchase order — and right now, most of that intelligence is invisible at the parent level.</p>
+
+  <div class="gap-visual">
+    <div class="gap-side">
+      <div class="gap-side-label">The Digital Engine</div>
+      <div class="gap-side-title">SSG · Parent Company</div>
+      <p class="gap-side-text">AI licenses deployed. Technical infrastructure built. Digital tools rolling out across all 14 companies. The engine is running.</p>
     </div>
-  </section>
+    <div class="gap-arrow">⟷</div>
+    <div class="gap-middle">
+      <div class="gap-middle-label">The Strategic Bridge</div>
+      <p class="gap-middle-title">Teloric · The Translation Layer</p>
+    </div>
+    <div class="gap-arrow">⟷</div>
+    <div class="gap-side">
+      <div class="gap-side-label">Branch Reality</div>
+      <div class="gap-side-title">14 Regional Companies</div>
+      <p class="gap-side-text">Estimators, PMs, and lighting specialists focused on specs, margin, and project delivery. Tools available. Adoption missing.</p>
+    </div>
+  </div>
 
-  <!-- S2 · THE PROBLEM -->
-  <section id="s2">
-    <div class="section-inner">
-      <div class="eyebrow">The Problem</div>
-      <h2>Lighting doesn't move like<br/>the rest of the portfolio.</h2>
-      <div class="split-table">
-        <div class="split-col">
-          <div class="split-col-head">How electrical moves</div>
-          <ul>
-            <li>SKU-based, transactional</li>
-            <li>Short cycle — quote to close in days</li>
-            <li>Pricing is set, visible, computable</li>
-            <li>Bidding context lives in the system</li>
-            <li>System-visible from the start</li>
-          </ul>
-        </div>
-        <div class="split-col">
-          <div class="split-col-head">How lighting actually moves</div>
-          <ul>
-            <li>Spec-driven, relationship-dependent</li>
-            <li>Months of conversations before a PO</li>
-            <li>Substitutions and alternates reshape every deal</li>
-            <li>Backorders and discontinued items kill margin mid-project</li>
-            <li>Pricing leverage is negotiated, not listed</li>
-            <li>Lives outside the system until the end</li>
-          </ul>
-        </div>
+  <p>Across industries, only 28% of employees can effectively use the AI tools their company provides. Not because the tools are bad — because no one translated the work first. In lighting distribution, where workflows are specification-driven and relationship-dependent, that translation gap is wider than almost any other industry.</p>
+</div>
+
+<!-- THREE PILLARS -->
+<div class="section">
+  <div class="section-label">Three Strategic Outcomes</div>
+  <h2 class="section-title">What this engagement delivers — and for whom.</h2>
+
+  <div class="pillar">
+    <div class="pillar-header">
+      <span class="pillar-num">I</span>
+      <div>
+        <div class="pillar-title">AI Adoption That Actually Lands</div>
+        <div class="pillar-who">Operationalizing the SSG investment at the branch level</div>
       </div>
     </div>
-  </section>
+    <div class="pillar-body">
+      <p class="pillar-desc">USESI has built the digital engine. This pillar ensures the engine powers the front line. Working alongside SSG's technical team, I serve as the lighting-specific liaison — translating AI tools into workflows that estimators, project managers, and sales teams actually use. The goal is to move from "having licenses" to "lighting-aware automation" that saves time and protects margin at every branch.</p>
+      <ul class="pillar-outcomes">
+        <li>Implement governance frameworks before deployment — what AI can do autonomously, what needs human review, what stays human</li>
+        <li>Translate lighting operational workflows into technical requirements that internal teams can build against</li>
+        <li>Validate AI outputs against professional standards — the expertise check that technical teams alone cannot perform</li>
+        <li>Move AI from disconnected regional experiments to a unified corporate asset</li>
+      </ul>
+    </div>
+  </div>
 
-  <!-- S3 · THE GAP -->
-  <section id="s3">
-    <div class="section-inner">
-      <div class="eyebrow">The Gap</div>
-      <h2>The decisions that drive margin<br/>happen before anyone opens a system.</h2>
-      <div class="timeline">
-        <div class="timeline-track">
-          <div class="tl-step">
-            <div class="tl-dot"></div>
-            <div class="tl-label">Spec</div>
-            <div class="tl-sub">Substitutions,<br/>alternate specs</div>
-          </div>
-          <div class="tl-step">
-            <div class="tl-dot"></div>
-            <div class="tl-label">Submittal</div>
-            <div class="tl-sub">Bidding wars,<br/>value engineering</div>
-          </div>
-          <div class="tl-step">
-            <div class="tl-dot"></div>
-            <div class="tl-label">Award</div>
-            <div class="tl-sub">Pricing leverage,<br/>SPA negotiations</div>
-          </div>
-          <div class="tl-step active">
-            <div class="tl-dot"></div>
-            <div class="tl-label">PO</div>
-            <div class="tl-sub">Eclipse<br/>starts here</div>
-          </div>
-          <div class="tl-step active">
-            <div class="tl-dot"></div>
-            <div class="tl-label">Delivery</div>
-            <div class="tl-sub">Transaction<br/>recorded</div>
-          </div>
-        </div>
-        <div class="timeline-bracket">
-          <div class="bracket-invisible">not in Eclipse — invisible to any system</div>
-          <div class="bracket-label">Eclipse covers this</div>
-        </div>
+  <div class="pillar">
+    <div class="pillar-header">
+      <span class="pillar-num">II</span>
+      <div>
+        <div class="pillar-title">The Mentorship Architecture</div>
+        <div class="pillar-who">Codifying the USESI Brain Trust before it retires</div>
       </div>
     </div>
-  </section>
+    <div class="pillar-body">
+      <p class="pillar-desc">The greatest risk to USESI's long-term growth is not technology — it is the expertise leak. Every month, 30-year veterans retire and take decades of uncaptured lighting knowledge with them. This pillar builds a structured 1-2 year mentorship program — not a course library, not a one-time onboarding — a living program that pairs new hires with curriculum, with experienced professionals, and with the specific knowledge of how lighting works inside USESI's ecosystem.</p>
+      <ul class="pillar-outcomes">
+        <li>Codify veteran "gut feel" — spec strategies, manufacturer relationships, pricing instincts — into a repeatable training engine</li>
+        <li>Design a hybrid curriculum using Rocky Mountain Lighting Academy and IES courses as a foundation, customized for USESI's operational model</li>
+        <li>Build the pairing structure — new hires connected to experienced professionals with competency benchmarks and milestone tracking</li>
+        <li>Build the talent pipeline now — before the gap becomes a hiring crisis</li>
+      </ul>
+    </div>
+  </div>
 
-  <!-- S4 · THE ROLE -->
-  <section id="s4">
-    <div class="section-inner">
-      <div class="eyebrow">The Role</div>
-      <div class="stat-block">
-        <div class="stat-line">1 role.</div>
-        <div class="stat-line">14 companies.</div>
-        <div class="stat-line"><span class="teal-italic">The cost is shared.</span></div>
-        <div class="stat-line"><span class="teal-italic">The return compounds.</span></div>
+  <div class="pillar">
+    <div class="pillar-header">
+      <span class="pillar-num">III</span>
+      <div>
+        <div class="pillar-title">The Visibility Layer</div>
+        <div class="pillar-who">Capturing pre-PO intelligence across all 14 companies</div>
       </div>
     </div>
-  </section>
-
-  <!-- S5 · WHAT CHANGES -->
-  <section id="s5">
-    <div class="section-inner">
-      <div class="eyebrow">Where It Starts</div>
-      <h2>Two entry points.<br/>One much larger gap.</h2>
-      <div class="deliverables-grid">
-        <div class="deliverable-card">
-          <div class="num">01</div>
-          <p>Institutional knowledge stops walking out the door. What your best people know — how to spec, how to sell, how to navigate the channel — becomes searchable, trainable, and repeatable. New hires ramp faster. Retirements don’t take the playbook with them.</p>
-        </div>
-        <div class="deliverable-card">
-          <div class="num">02</div>
-          <p>Leadership sees across the portfolio for the first time. Which projects are worth chasing. Which reps are protecting margin. Which manufacturers are delivering. Not as a reporting exercise — as a byproduct of work that’s already happening.</p>
-        </div>
-      </div>
+    <div class="pillar-body">
+      <p class="pillar-desc">Right now, the most important data in a lighting deal happens before the purchase order is placed — and it is invisible to the parent company. Manufacturer performance, margin patterns, rep relationships, spec-to-award conversion — all of it lives in people's heads or in disconnected branch systems. This pillar builds the data layer that surfaces that intelligence across all 14 companies as a byproduct of work already happening.</p>
+      <ul class="pillar-outcomes">
+        <li>Design mechanisms to capture pre-PO intelligence — the conversations, negotiations, and spec decisions that drive margin</li>
+        <li>Build visibility into manufacturer performance, rep relationships, and procurement patterns across all 14 companies</li>
+        <li>Surface pipeline and margin intelligence at the parent level — not as a reporting burden, but as a byproduct of how work flows</li>
+        <li>Give leadership the ability to see across the full portfolio and act on what they see</li>
+      </ul>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- S6 · WHO I AM -->
-  <section id="s6">
-    <div class="section-inner">
-      <div class="eyebrow">Who I Am</div>
-      <h2>Twenty years inside lighting.</h2>
-      <div class="pull-quotes">
-        <div class="pull-quote">
-          <div>
-            <div class="pq-company">Pure Lighting</div>
-            <div class="pq-date">2007 – 2011</div>
-          </div>
-          <div class="pq-text">Built and led a boutique rep agency from scratch — 200+ accounts across every type in the channel. Took it through merger.</div>
-        </div>
-        <div class="pull-quote">
-          <div>
-            <div class="pq-company">Visual Interest</div>
-            <div class="pq-date">2011 – 2017</div>
-          </div>
-          <div class="pq-text">Six-time top producer. Led outside spec sales. Built internal tools and workflows still widely referenced.</div>
-        </div>
-        <div class="pull-quote">
-          <div>
-            <div class="pq-company">Luxxbox</div>
-            <div class="pq-date">2019 – 2021</div>
-          </div>
-          <div class="pq-text">Grew U.S. revenue 35% — built the rep network, go-to-market, and sales infrastructure from zero. Developed rep sales portal.</div>
-        </div>
-        <div class="pull-quote">
-          <div>
-            <div class="pq-company">Coronet</div>
-            <div class="pq-date">2021 – 2026</div>
-          </div>
-          <div class="pq-text">Doubled territory. Built AI-powered onboarding, training, and rep sales systems. Surfaced the knowledge gap their own ERP couldn't see.</div>
-        </div>
-      </div>
+<!-- HUB AND SPOKE -->
+<div class="section">
+  <div class="section-label">The Shared Cost Logic</div>
+  <h2 class="section-title">One strategic role. Fourteen companies. The cost is shared. The return compounds.</h2>
+
+  <p>By engaging at the parent company level, this is not a cost absorbed by a single regional branch. It is a shared investment that serves the entire USESI network — every brand, every region, every branch — simultaneously.</p>
+
+  <div class="hub-box">
+    <div class="hub-label">The Hub-and-Spoke Advantage</div>
+    <p class="hub-quote">"Whether it is Electrical Wholesalers in New England, Walters Wholesale in California, or Monarch Electric in New Jersey — the operational challenges of lighting are consistent. One strategic engagement at the parent level provides a unified roadmap that benefits every regional brand while sharing the investment across the network."</p>
+    <div class="hub-brands">
+      <span class="hub-brand highlight">Wiedenbach Brown</span>
+      <span class="hub-brand">Electrical Wholesalers · CT</span>
+      <span class="hub-brand">Electrical Wholesalers · NE</span>
+      <span class="hub-brand">Walters Wholesale</span>
+      <span class="hub-brand">Monarch Electric</span>
+      <span class="hub-brand">Franklin-Griffith</span>
+      <span class="hub-brand">HZ Electrical Supply</span>
+      <span class="hub-brand">Lade/Danlar</span>
+      <span class="hub-brand">SESCO</span>
     </div>
-  </section>
+  </div>
 
-  <!-- S7 · THE CLOSE -->
-  <section id="s7">
-    <div class="section-inner">
-      <div class="eyebrow">The Moment</div>
-      <div class="body-text close-text">
-        <p>Wiedenbach Brown has already built something rare — <span class="teal">a platform, a reputation, and a way of operating that others have spent decades trying to replicate.</span></p>
-        <p>They saw national account lighting before it had a name. That instinct — to move first, to recognize where the market is going — that's still here. The question is whether this organization uses it again.</p>
-        <p><span class="teal">110 years of momentum.</span> Fourteen companies. One inflection point.</p>
-      </div>
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-num">14</div>
+      <p class="stat-label">regional companies served simultaneously from one parent-level engagement</p>
     </div>
-  </section>
-
-  <!-- S7B · THE QUESTION -->
-  <section id="s7b">
-    <div class="section-inner" style="text-align:center;">
-      <p style="font-size:13px; letter-spacing:0.25em; text-transform:uppercase; color:var(--teal); margin-bottom:40px;">The momentum is already here.</p>
-      <p style="font-family:'Playfair Display',serif; font-size:clamp(26px,4vw,52px); font-style:italic; line-height:1.35; color:var(--white); max-width:760px; margin:0 auto;">The only question is —<br/>are you ready to build it,<br/>or be built by it?</p>
+    <div class="stat-card">
+      <div class="stat-num">150+</div>
+      <p class="stat-label">locations across the USESI network that benefit from a unified lighting intelligence strategy</p>
     </div>
-  </section>
-
-  <!-- S8 · RESUME -->
-  <section id="s8">
-    <div class="section-inner">
-      <div class="eyebrow">The Foundation</div>
-      <h2>Twenty years.<br/>The work behind the layer.</h2>
-      <div class="body-text">
-        <p>The companies, the roles, the results — everything points to this being the moment.</p>
-      </div>
-      <a href="Micaila-Vaughn-Resume.pdf" class="btn-outline" target="_blank">View Resume</a>
+    <div class="stat-card">
+      <div class="stat-num">28%</div>
+      <p class="stat-label">of employees can effectively use AI tools their company provides — the translation gap this engagement closes</p>
     </div>
-  </section>
+  </div>
+</div>
 
-  <script>
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.12 });
-    sections.forEach(s => observer.observe(s));
-  </script>
+<!-- ENGAGEMENT MODEL -->
+<div class="section">
+  <div class="section-label">Engagement Model</div>
+  <h2 class="section-title">Three tiers. Structured for where USESI is — and where it's going.</h2>
+
+  <p>Scope and investment are defined collaboratively based on organizational priorities and timeline. Every tier is built on the same foundation: embedded, measurable, and designed from day one for the organization to own the outcome independently.</p>
+
+  <div class="tier">
+    <div class="tier-header">
+      <div class="tier-name">The Diagnostic Foundation</div>
+      <div class="tier-tag">Entry Point · Fixed Fee</div>
+    </div>
+    <div class="tier-body">
+      <p class="tier-desc">A high-impact diagnostic engagement across selected regional companies. We map the Translation Gap — where AI tools aren't landing, where expertise is leaking, where the Visibility Layer needs to begin. The ground truth that everything else is built from. This is where Wiedenbach Brown fits — a day and a half at their annual retreat surfaces the operational reality that informs the parent-level strategy.</p>
+      <div class="tier-outcome">Outcome</div>
+      <p class="tier-outcome-text">A Ground Truth report and prioritized roadmap — the foundation for a parent-level engagement that actually fits how USESI operates.</p>
+    </div>
+  </div>
+
+  <div class="tier">
+    <div class="tier-header">
+      <div class="tier-name">Strategic Stewardship</div>
+      <div class="tier-tag">Advisory · Monthly Retainer</div>
+    </div>
+    <div class="tier-body">
+      <p class="tier-desc">An ongoing advisory retainer providing USESI leadership and internal teams with consistent strategic guidance. Monthly reviews, check-ins with regional leadership, roadmap stewardship, and responsive advisory as priorities shift. Keeps the engine aligned as the rollout develops across all 14 companies.</p>
+      <div class="tier-outcome">Outcome</div>
+      <p class="tier-outcome-text">Sustained momentum and strategic alignment — preventing the drift that happens when implementation outpaces governance.</p>
+    </div>
+  </div>
+
+  <div class="tier">
+    <div class="tier-header">
+      <div class="tier-name">The Integrated Partnership</div>
+      <div class="tier-tag">Full Engagement · Embedded</div>
+    </div>
+    <div class="tier-body">
+      <p class="tier-desc">A deeply embedded strategic partnership — active implementation across all three pillars simultaneously. Governance framework build. Mentorship Architecture design and rollout. Visibility Layer architecture. Shadow work observing frontline workflows. Direct training of internal champions who will own and sustain the system independently after the engagement ends.</p>
+      <div class="tier-outcome">Outcome</div>
+      <p class="tier-outcome-text">A fully operationalized intelligence layer — owned by USESI, compounding its advantage across all 14 companies long after the engagement concludes.</p>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:32px; margin-bottom:14px;">The Teloric Standard — In Every Engagement</div>
+
+  <div class="standard-grid">
+    <div class="standard-card">
+      <div class="standard-label">Embedded — Not External</div>
+      <p class="standard-text">I work within your communication channels — Teams, email, existing workflows — as an integrated resource, not an outside vendor.</p>
+    </div>
+    <div class="standard-card">
+      <div class="standard-label">Shadow Work & Ground Truth</div>
+      <p class="standard-text">Available to observe estimators, PMs, and sales teams firsthand — systems built around how work actually flows, not how it's documented.</p>
+    </div>
+    <div class="standard-card">
+      <div class="standard-label">ROI Tracking & Milestones</div>
+      <p class="standard-text">Success defined on day one. Quarterly reviews tracking measurable changes in adoption, capability, and business outcomes.</p>
+    </div>
+    <div class="standard-card">
+      <div class="standard-label">The Goal Is Independence</div>
+      <p class="standard-text">The ultimate measure of success is the moment USESI no longer needs the architect. We build capability — not dependency.</p>
+    </div>
+  </div>
+
+  <div class="wb-box">
+    <div class="wb-label">Connection to the Wiedenbach Brown Retreat Engagement</div>
+    <p class="wb-text">The Wiedenbach Brown diagnostic retreat ($2,000 · day and a half) is the ground-level entry point — providing immediate operational intelligence at the company level. This parent-level engagement is the natural strategic evolution: scaling the governance, mentorship, and visibility architecture across the full USESI network. Sister engagements. Not competing ones.</p>
+  </div>
+</div>
+
+<!-- FOUNDATION -->
+<div class="section">
+  <div class="section-label">The Foundation</div>
+  <h2 class="section-title">Twenty years inside architectural lighting. Every side of the table.</h2>
+  <p>Manufacturing, rep networks, regional sales, national accounts. The full arc of how a lighting project actually moves — from the first spec conversation through value engineering, submittal, award, and delivery. Every role in the channel. Every friction point. Every place where intelligence gets created and then disappears.</p>
+  <p>Teloric is the synthesis of that experience — AI systems strategy built for the industries I know from the inside, working alongside the teams already doing the work. NLP Practitioner certified. SXSW 2026 Innovation Badge, AI track. WILD National — built the mentorship program from analog to digital, now supporting 100+ women in the architectural lighting industry.</p>
+  <p style="font-size:13px; color:rgba(255,255,255,0.28); font-style:italic;">The full career arc is in the resume — available below.</p>
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <h2 class="closing-headline">One Role. Fourteen Companies.<br><em>The return compounds across all of them.</em></h2>
+  <p class="closing-sub">USESI has the infrastructure. The 14 companies have the talent. The gap between those two things — the translation, the mentorship, the visibility — is exactly what this engagement closes. The goal is not a better system. It is an organization that owns its own intelligence.</p>
+
+  <div class="closing-buttons">
+    <a href="https://calendly.com/micailajanevaughn/new-meeting-1" target="_blank" class="cta-primary">Schedule a Conversation</a>
+    <a href="mailto:micailajanevaughn@gmail.com?subject=USESI%20Strategic%20Engagement&body=Hi%20Micaila%2C%20I%27d%20like%20to%20discuss%20the%20proposal." class="cta-secondary">Send an Email</a>
+  </div>
+
+  <p class="closing-note">micailajanevaughn@gmail.com · 303.981.7338 · teloric.com</p>
+</div>
+
+<footer class="footer">
+  <div>
+    <div class="footer-brand">Teloric × USESI</div>
+    <div class="footer-meta">Strategic Briefing · Micaila Vaughn</div>
+  </div>
+  <a class="footer-resume" href="Micaila-Vaughn-Resume.pdf" target="_blank">View Resume</a>
+</footer>
 
 </body>
 </html>
