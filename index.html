@@ -3,65 +3,368 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teloric × USESI · Strategic Briefing</title>
+<title>Teloric · Wiedenbach Brown</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #0d0d0d;
-    color: #f5f5f3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    text-align: center;
-    padding: 48px 32px;
-    position: relative;
-    overflow: hidden;
+  :root {
+    --black: #0d0d0d;
+    --dark: #111111;
+    --darker: #0a0a0a;
+    --teal: #3ecfbf;
+    --white: #f5f5f3;
+    --off-white: #c8c8c4;
+    --muted: #6a6a66;
+    --rule: #222220;
+    --paper: #f8f5f0;
+    --stone: #4a4541;
+    --pebble: #7a7570;
+    --accent: #8b6f47;
+    --accent-light: #c4a882;
+    --gold: #b89b6a;
+    --prop-rule: #ddd8d0;
   }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--white); font-weight: 300; }
 
-  .bg-glow { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(62,207,191,0.05) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: pulse 7s ease-in-out infinite; pointer-events: none; }
-  @keyframes pulse { 0%, 100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.12); } }
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 32px; background: var(--dark); position: relative; }
+  .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); margin-bottom: 48px; }
+  .hero-tag span { color: var(--teal); }
+  .hero-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 3.8vw, 44px); font-weight: 500; line-height: 1.2; color: var(--white); max-width: 680px; margin-bottom: 20px; }
+  .hero-headline .teal { color: var(--teal); }
+  .hero-sub { font-size: clamp(13px, 2vw, 15px); line-height: 1.75; color: var(--off-white); max-width: 520px; margin: 0 auto 56px; opacity: 0.7; }
+  .hero-cta { display: inline-block; background: var(--teal); color: var(--black); font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; padding: 16px 40px; transition: background 0.2s, color 0.2s; cursor: pointer; }
+  .hero-cta:hover { background: var(--white); }
+  .hero-byline { position: absolute; bottom: 36px; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: var(--muted); }
 
-  .fade-in { opacity: 0; transform: translateY(16px); animation: fadeUp 0.8s ease forwards; }
-  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-  .d1 { animation-delay: 0.1s; } .d2 { animation-delay: 0.4s; } .d3 { animation-delay: 0.7s; } .d4 { animation-delay: 1.0s; } .d5 { animation-delay: 1.4s; } .d6 { animation-delay: 1.8s; }
+  #bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.96); border-top: 1px solid var(--rule); padding: 12px 32px; display: flex; justify-content: space-between; align-items: center; z-index: 100; backdrop-filter: blur(8px); transform: translateY(100%); transition: transform 0.4s ease; }
+  #bottom-bar.visible { transform: translateY(0); }
+  .bar-brand { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 600; color: var(--teal); letter-spacing: 0.08em; text-transform: uppercase; }
+  .bar-meta { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px; }
+  .bar-resume { display: inline-block; border: 1px solid var(--teal); color: var(--teal); font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; padding: 8px 20px; transition: background 0.2s, color 0.2s; }
+  .bar-resume:hover { background: var(--teal); color: var(--black); }
 
-  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: #6a6a66; margin-bottom: 48px; }
-  .eyebrow span { color: #3ecfbf; }
+  #proposal { background: var(--paper); color: var(--stone); }
+  .p-header { background: var(--darker); padding: 56px 40px 44px; border-bottom: 1px solid var(--rule); }
+  .p-brand-line { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 24px; }
+  .p-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 500; line-height: 1.1; color: var(--white); }
+  .p-title em { font-style: italic; color: var(--teal); opacity: 0.8; }
+  .p-meta-bar { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; flex-wrap: wrap; gap: 20px 32px; }
+  .p-meta-item { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+  .p-meta-item strong { display: block; font-size: 9.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 1px; }
 
-  .headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 5vw, 58px); font-weight: 500; line-height: 1.15; color: #f5f5f3; max-width: 720px; margin-bottom: 10px; }
-  .headline em { font-style: italic; color: #3ecfbf; }
+  .p-section { padding: 36px 40px; border-bottom: 1px solid var(--prop-rule); max-width: 760px; margin: 0 auto; }
+  .p-label { font-size: 9.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .p-text { font-size: 13.5px; line-height: 1.8; color: var(--stone); margin-bottom: 13px; }
+  .p-text:last-child { margin-bottom: 0; }
 
-  .rule { width: 44px; height: 1px; background: #3ecfbf; margin: 28px auto; opacity: 0.35; }
+  .exec-band { background: #f0ebe3; padding: 28px 40px; border-bottom: 1px solid var(--prop-rule); }
+  .exec-inner { max-width: 760px; margin: 0 auto; }
+  .exec-label { font-size: 9.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .exec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .exec-card { background: white; border: 1px solid var(--prop-rule); border-radius: 2px; padding: 13px 15px; }
+  .ec-label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 4px; }
+  .ec-val { font-size: 12.5px; color: #1a1714; line-height: 1.5; }
 
-  .sub { font-size: clamp(14px, 1.8vw, 16px); line-height: 1.8; color: rgba(255,255,255,0.42); max-width: 500px; margin: 0 auto 48px; }
+  .p-card { border: 1px solid var(--prop-rule); border-radius: 2px; overflow: hidden; margin: 18px 0; }
+  .p-card-header { background: #1a1714; padding: 10px 16px; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .p-card-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--prop-rule); gap: 12px; }
+  .p-card-row:last-child { border-bottom: none; }
+  .pcr-label { font-size: 13px; color: var(--stone); flex: 1; line-height: 1.5; }
+  .pcr-label span { display: block; font-size: 11.5px; color: var(--pebble); margin-top: 3px; }
+  .pcr-label strong { color: #1a1714; font-weight: 500; }
+  .pcr-val { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--accent); flex-shrink: 0; }
+  .p-card-total { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f0ebe3; font-size: 13px; font-weight: 500; color: #1a1714; border-top: 1px solid var(--prop-rule); }
+  .p-card-total-val { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--accent); }
 
-  .cta { display: inline-block; background: #3ecfbf; color: #0d0d0d; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; padding: 16px 44px; transition: background 0.25s, transform 0.2s; }
-  .cta:hover { background: #f5f5f3; transform: translateY(-2px); }
+  .pull-quote { background: #1a1714; padding: 26px 26px 22px; margin: 20px 0; border-radius: 2px; }
+  .pq-mark { font-family: 'Cormorant Garamond', serif; font-size: 56px; color: var(--teal); opacity: 0.4; line-height: 0.6; margin-bottom: 10px; display: block; }
+  .pq-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; line-height: 1.65; color: white; font-style: italic; margin-bottom: 12px; }
+  .pq-attr { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
 
-  .byline { margin-top: 32px; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: #6a6a66; }
+  .inline-quote { border-left: 3px solid var(--teal); padding: 14px 18px; background: white; margin: 18px 0; border-radius: 0 2px 2px 0; }
+  .iq-text { font-family: 'Cormorant Garamond', serif; font-size: 15px; line-height: 1.65; color: var(--stone); font-style: italic; margin-bottom: 6px; }
+  .iq-attr { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
 
-  .teal-line { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #3ecfbf, transparent); opacity: 0.2; }
+  .pattern-box { background: white; border: 1px solid var(--prop-rule); border-radius: 2px; padding: 20px; margin: 18px 0; }
+  .pb-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 10px; }
+  .pb-text { font-size: 13px; line-height: 1.75; color: var(--stone); margin-bottom: 10px; }
+  .pb-text:last-child { margin-bottom: 0; }
+
+  .timeline { background: white; border: 1px solid var(--prop-rule); border-radius: 2px; overflow: hidden; margin: 18px 0; }
+  .tl-header { background: #1a1714; padding: 10px 16px; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .tl-row { display: flex; align-items: center; padding: 11px 16px; border-bottom: 1px solid var(--prop-rule); gap: 16px; }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-day { font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 0.05em; flex-shrink: 0; width: 80px; }
+  .tl-event { font-size: 12.5px; color: var(--stone); line-height: 1.5; }
+
+  .q-block { background: white; border: 1px solid var(--prop-rule); border-radius: 2px; padding: 18px; margin: 16px 0; }
+  .q-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
+  .q-item { font-size: 12.5px; color: var(--stone); line-height: 1.65; padding: 6px 0; border-bottom: 1px solid var(--prop-rule); font-style: italic; }
+  .q-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .del { padding: 16px 0; border-bottom: 1px solid var(--prop-rule); }
+  .del:first-child { border-top: 1px solid var(--prop-rule); }
+  .del-head { display: flex; align-items: baseline; gap: 11px; margin-bottom: 5px; }
+  .del-n { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--accent-light); flex-shrink: 0; }
+  .del-t { font-size: 13.5px; font-weight: 500; color: #1a1714; }
+  .del-d { font-size: 12.5px; color: var(--pebble); line-height: 1.7; padding-left: 28px; margin: 0; }
+  .del-bullets { list-style: none; padding-left: 28px; margin-top: 7px; }
+  .del-bullets li { font-size: 12px; color: var(--pebble); line-height: 1.6; padding: 2px 0; display: flex; gap: 8px; }
+  .del-bullets li::before { content: '·'; color: var(--accent-light); flex-shrink: 0; }
+
+  .gov-table { background: #fdfaf6; border: 1px solid var(--prop-rule); border-radius: 2px; overflow: hidden; margin: 14px 0; }
+  .gov-table-header { padding: 11px 16px; border-bottom: 1px solid var(--prop-rule); background: #f0ebe3; }
+  .gov-table-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
+  .gov-row { display: grid; grid-template-columns: 155px 1fr; border-bottom: 1px solid var(--prop-rule); }
+  .gov-row:last-child { border-bottom: none; }
+  .gov-item { font-size: 11.5px; padding: 10px 13px; line-height: 1.5; }
+  .gov-item.key { color: #1a1714; font-weight: 500; border-right: 1px solid var(--prop-rule); background: #f8f5f0; }
+  .gov-item.val { color: var(--stone); }
+  .gov-footer { padding: 11px 16px; background: #f0ebe3; border-top: 1px solid var(--prop-rule); font-size: 11.5px; color: var(--stone); font-style: italic; line-height: 1.6; }
+
+  .inv { background: #1a1714; padding: 28px 24px; border-radius: 2px; margin: 0 0 16px; }
+  .inv-label { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
+  .inv-amount { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 500; color: white; line-height: 1; margin-bottom: 10px; }
+  .inv-detail { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.9; }
+  .inv-detail strong { color: rgba(255,255,255,0.8); font-weight: 400; }
+
+  .roi-box { background: #f0ebe3; border: 1px solid var(--prop-rule); border-radius: 2px; padding: 18px 20px; margin: 0 0 16px; }
+  .roi-label { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 10px; }
+  .roi-text { font-size: 12.5px; color: var(--stone); line-height: 1.75; }
+
+  .horizon { border-left: 3px solid var(--teal); padding: 18px 20px; background: white; border-radius: 0 2px 2px 0; }
+  .horizon-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 500; color: #1a1714; margin-bottom: 8px; }
+  .horizon p { font-size: 12.5px; color: var(--stone); margin: 0; }
+
+  .p-cta { padding: 48px 40px; text-align: center; background: #0d0d0d; }
+  .p-cta-inner { max-width: 760px; margin: 0 auto; }
+  .p-cta-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: white; margin-bottom: 10px; }
+  .p-cta-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 28px; line-height: 1.6; }
+  .p-cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .p-cta-btn { display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; padding: 14px 32px; transition: all 0.2s; }
+  .p-cta-btn.primary { background: var(--teal); color: var(--black); }
+  .p-cta-btn.primary:hover { background: white; }
+  .p-cta-btn.secondary { border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); }
+  .p-cta-btn.secondary:hover { border-color: var(--teal); color: var(--teal); }
+  .p-cta-note { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 16px; line-height: 1.7; }
+  .p-cta-sxsw { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11.5px; color: rgba(255,255,255,0.3); font-style: italic; }
+
+  .p-footer { background: #080808; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--rule); }
+  .p-footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; color: var(--teal); text-transform: uppercase; }
+  .p-footer-tag { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-top: 3px; }
+  .p-footer-contact { font-size: 11px; color: rgba(255,255,255,0.3); line-height: 1.7; text-align: right; }
+  .p-footer-contact a { color: var(--teal); text-decoration: none; opacity: 0.7; }
+
+  @media (max-width: 500px) {
+    .p-section, .p-header, .exec-band, .p-cta, .p-footer { padding-left: 20px; padding-right: 20px; }
+    .exec-grid { grid-template-columns: 1fr; }
+    .gov-row { grid-template-columns: 120px 1fr; }
+    .gov-item { font-size: 11px; padding: 8px 10px; }
+    .p-cta-buttons { flex-direction: column; align-items: center; }
+    #bottom-bar { padding: 10px 20px; }
+  }
 </style>
 </head>
 <body>
-  <div class="bg-glow"></div>
-  <div class="teal-line"></div>
 
-  <div class="eyebrow fade-in d1">For USESI Leadership · <span>A Teloric Proposal</span></div>
+<section id="hero">
+  <div class="hero-tag">For Lara · <span>Wiedenbach Brown</span></div>
+  <h1 class="hero-headline">Most companies are spending millions<br>layering AI onto structures built<br>for a world that <span class="teal">no longer exists.</span></h1>
+  <p class="hero-sub">This is not about AI tool recommendations. It's about understanding how Wiedenbach Brown actually works — and building the governance foundation to transform it safely.</p>
+  <a href="#" class="hero-cta" id="enter-btn">Read the Proposal</a>
+  <div class="hero-byline">A proposal from Micaila Vaughn · Teloric</div>
+</section>
 
-  <h1 class="headline fade-in d2">The engine is in place.<br><em>The translation is the missing piece.</em></h1>
+<div id="bottom-bar">
+  <div>
+    <div class="bar-brand">Teloric</div>
+    <div class="bar-meta">Micaila Vaughn · Wiedenbach Brown</div>
+  </div>
+  <a class="bar-resume" href="resume.pdf" target="_blank">Download Resume</a>
+</div>
 
-  <div class="rule fade-in d3"></div>
+<div id="proposal" style="display:none;">
 
-  <p class="sub fade-in d4">USESI has built world-class digital infrastructure through the Shared Services Group. What's missing is the bridge between that investment and the operational reality of 14 regional lighting companies — from Electrical Wholesalers in New England to Walters in California.</p>
+  <header class="p-header">
+    <div class="p-brand-line">Teloric — Systems Aligned to Purpose</div>
+    <h2 class="p-title">Engagement Proposal<br><em>Wiedenbach Brown</em></h2>
+    <div class="p-meta-bar">
+      <div class="p-meta-item"><strong>Prepared for</strong>Lara Cordell, VP · Wiedenbach Brown</div>
+      <div class="p-meta-item"><strong>Prepared by</strong>Micaila Vaughn · Teloric</div>
+      <div class="p-meta-item"><strong>Date</strong>April 2026</div>
+    </div>
+  </header>
 
-  <a href="site.html" class="cta fade-in d5">Read the Briefing</a>
+  <div class="exec-band">
+    <div class="exec-inner">
+      <div class="exec-label">Engagement at a Glance</div>
+      <div class="exec-grid">
+        <div class="exec-card"><div class="ec-label">What This Is</div><div class="ec-val">A day and a half inside the WB retreat — listening, mapping, identifying automation opportunities</div></div>
+        <div class="exec-card"><div class="ec-label">The Goal</div><div class="ec-val">Surface where manual workflows can be automated and build the governance foundation to do it safely</div></div>
+        <div class="exec-card"><div class="ec-label">Investment</div><div class="ec-val">$2,000 fixed fee · All deliverables included · No travel costs</div></div>
+        <div class="exec-card"><div class="ec-label">What Comes Next</div><div class="ec-val">Implementation, automation builds, deeper org redesign — scoped separately based on results</div></div>
+      </div>
+    </div>
+  </div>
 
-  <div class="byline fade-in d6">Micaila Vaughn · Founder, Teloric</div>
-</body>
-</html>
+  <div class="p-section">
+    <div class="p-label">The Challenge: Why Traditional AI Adoption Fails</div>
+    <p class="p-text">Most organizations approach AI transformation by asking: <em>"Where can we use AI tools?"</em> This is the wrong question. The right question is: <em>which of our organizational structures were built for constraints that no longer exist?</em></p>
+    <div class="p-card">
+      <div class="p-card-header">The Obsolete Physics of Work</div>
+      <div class="p-card-row"><div class="pcr-label"><strong>Execution was expensive</strong><span>So we built approval layers, sequential workflows, and risk mitigation processes.</span></div></div>
+      <div class="p-card-row"><div class="pcr-label"><strong>Expertise was scarce</strong><span>So we created departments, job descriptions, and knowledge silos.</span></div></div>
+      <div class="p-card-row"><div class="pcr-label"><strong>Attention was finite</strong><span>So we designed hierarchies, handoffs, and coordination bottlenecks.</span></div></div>
+    </div>
+    <p class="p-text">AI changes all three. But layering new tools onto obsolete structures creates friction, not transformation.</p>
+    <div class="pull-quote">
+      <span class="pq-mark">"</span>
+      <div class="pq-text">We're failing at AI. But it's not because the tools aren't good enough. We're failing because we're designing for a system that's already obsolete. The winners of the AI era won't be the fastest tool adopters — they'll be the ones who redesign how work is organized, value is created, and ecosystems are navigated.</div>
+      <div class="pq-attr">Ian Beacraft · SXSW 2026</div>
+    </div>
+    <p class="p-text">Three things have to be true before AI delivers at scale: governance frameworks define what AI can and can't do before deployment, institutional knowledge is encoded so AI operates with your judgment — not just your instructions, and coordination infrastructure is separated from culture so you know what to automate and what to protect.</p>
+    <p class="p-text">This engagement provides the diagnostic foundation for all three.</p>
+  </div>
+
+  <div class="p-section">
+    <div class="p-label">The Opportunity</div>
+    <div class="inline-quote">
+      <div class="iq-text">AI is not software anymore — it's infrastructure. Embedded in workflows, supply chains, hiring systems, customer experience, and decision-making in ways most companies haven't mapped, let alone governed. The hype phase is over. The invoice has arrived.</div>
+      <div class="iq-attr">SXSW 2026 · AI Landscape Briefing</div>
+    </div>
+    <p class="p-text">Organizations that wait to map their systems and build governance frameworks will spend the next 18 months cleaning up automated mistakes instead of capturing automated value. A company retreat — where your team is already in the room discussing process and workflow — is a rare opportunity to surface what's actually there.</p>
+    <p class="p-text">Most organizations think of AI as a tool you manually interact with. The bigger opportunity is automation: workflows that run without anyone initiating them. That distinction isn't widely understood, and it's where the real leverage lives.</p>
+  </div>
+
+  <div class="p-section">
+    <div class="p-label">Retreat Schedule + Role</div>
+    <div class="p-card">
+      <div class="p-card-header">Monday — Full Day</div>
+      <div class="p-card-row"><div class="pcr-label">Morning Breakout Session<span>Estimating and/or PM — attending where most relevant based on final schedule</span></div><div class="pcr-val">~4.5 hrs</div></div>
+      <div class="p-card-row"><div class="pcr-label">Afternoon Combined Session<span>Estimating, PM, and Sales together — cross-departmental workflow and coordination</span></div><div class="pcr-val">~4.5 hrs</div></div>
+      <div class="p-card-header">Tuesday — Morning Only</div>
+      <div class="p-card-row"><div class="pcr-label">Morning Breakout Sessions<span>Individual department sessions — attending based on priority and final schedule confirmation</span></div><div class="pcr-val">Pending schedule</div></div>
+      <div class="p-card-header">Post-Retreat</div>
+      <div class="p-card-row"><div class="pcr-label">Synthesis, deliverables + readout call<span>Completed within 7 business days</span></div><div class="pcr-val">~5 hrs</div></div>
+      <div class="p-card-total"><span>Total Engagement</span><span class="p-card-total-val">~18 hrs</span></div>
+    </div>
+    <div class="pattern-box">
+      <div class="pb-label">Role During Retreat</div>
+      <p class="pb-text">Your team runs their own sessions — I'm not facilitating. My role is strategic pattern recognition: listening for bottlenecks, identifying where institutional knowledge is concentrated in one or two people, mapping where handoffs break down, and spotting automation opportunities that emerge from how work actually flows — not how it's documented.</p>
+      <p class="pb-text">This requires deep industry knowledge and organizational architecture expertise, not just AI tool familiarity. That's why 20+ years inside lighting and electrical distribution matters. There's no ramp-up time, no learning curve on the industry. The patterns are visible from day one.</p>
+    </div>
+
+    <div class="pattern-box" style="margin-top:18px;">
+      <div class="pb-label">Prerequisites &amp; Setup — Recommended</div>
+      <p class="pb-text">To maximize the value of this engagement, I recommend that a session leader run a live Microsoft Teams meeting with transcription and recording enabled for all retreat sessions. This turns every conversation into a searchable, referencable asset — and demonstrates exactly the kind of AI-powered meeting infrastructure that can scale across the organization. If a Copilot license is already in place, your IT team can enable transcription permissions ahead of the retreat. I'm happy to walk through the setup.</p>
+    </div>
+    <div class="inline-quote" style="margin-top:18px;">
+      <div class="iq-text">Optional Add-On: Remote Session Synthesis — For any sessions not attended in person, recorded transcripts can be reviewed and integrated into the deliverables. This ensures full coverage across all departments regardless of schedule constraints.</div>
+      <div class="iq-attr">Additional 3-4 hrs · Scoped separately · Requires Teams transcription enabled prior to retreat</div>
+    </div>
+    <div class="q-block">
+      <div class="q-label">The kinds of questions that surface the real picture</div>
+      <div class="q-item">Where does work get stuck — and why does everyone already know it but nothing's changed?</div>
+      <div class="q-item">Which approval layers are about risk mitigation vs. just how it's always been done?</div>
+      <div class="q-item">If AI could handle 80% of this task — what would the humans do instead?</div>
+      <div class="q-item">Where are departments creating walls that prevent information from flowing?</div>
+      <div class="q-item">What does "done well" actually look like here — and how do people know?</div>
+    </div>
+    <div class="timeline">
+      <div class="tl-header">Delivery Timeline</div>
+      <div class="tl-row"><span class="tl-day">Day 1-2</span><span class="tl-event">On-site retreat attendance — 18 hours of observation and pattern recognition</span></div>
+      <div class="tl-row"><span class="tl-day">Days 3-7</span><span class="tl-event">Synthesis, analysis, and deliverable development</span></div>
+      <div class="tl-row"><span class="tl-day">Day 8</span><span class="tl-event">Complete deliverables package delivered</span></div>
+      <div class="tl-row"><span class="tl-day">Day 9-10</span><span class="tl-event">Virtual readout call with leadership team</span></div>
+    </div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-label">Deliverables</div>
+    <p class="p-text" style="margin-bottom:16px;">Four outputs, delivered within a week of the retreat. Practical, visual, built from what was heard in the room.</p>
+    <div class="del">
+      <div class="del-head"><span class="del-n">1</span><span class="del-t">Automation Opportunity Map</span></div>
+      <p class="del-d">The primary deliverable. A visual map of where manual, repetitive workflows can be automated — ranked by impact and ease of integration. Built from direct observation and knowledge of WB's existing systems. Includes workflow maps, bottleneck callouts, and identification of which structures are built for constraints that no longer exist.</p>
+    </div>
+    <div class="del">
+      <div class="del-head"><span class="del-n">2</span><span class="del-t">Workflow + Decision Patterns Summary</span></div>
+      <p class="del-d">A synthesis of how decisions actually get made, where institutional knowledge lives, and which processes are coordination infrastructure vs. culture. The foundation for any AI system that needs to operate with your judgment, not just your instructions.</p>
+    </div>
+    <div class="del">
+      <div class="del-head"><span class="del-n">3</span><span class="del-t">Governance Framework</span></div>
+      <p class="del-d">Most organizations deploy AI first and govern later — which creates risk, not value. This framework defines what AI can run autonomously, what needs a human in the loop, and what must stay human. Built before anything gets deployed.</p>
+      <div class="gov-table">
+        <div class="gov-table-header"><span class="gov-table-label">What Must Be in Place Before Any Enterprise LLM Goes Live</span></div>
+        <div class="gov-row"><div class="gov-item key">AI Acceptable Use Policy</div><div class="gov-item val">What employees can and cannot input. What outputs can be used and how.</div></div>
+        <div class="gov-row"><div class="gov-item key">Updated Employee Handbook</div><div class="gov-item val">AI conduct expectations, confidentiality obligations, and accountability for AI-assisted work.</div></div>
+        <div class="gov-row"><div class="gov-item key">Data Governance Rules</div><div class="gov-item val">What data is permissible inside LLMs. How sensitive and client data is protected.</div></div>
+        <div class="gov-row"><div class="gov-item key">Decision Authority Map</div><div class="gov-item val">Which decisions AI can make autonomously vs. which require human review.</div></div>
+        <div class="gov-row"><div class="gov-item key">Incident &amp; Error Protocol</div><div class="gov-item val">How errors, bias, and misuse are identified, reported, and resolved.</div></div>
+        <div class="gov-row"><div class="gov-item key">IP &amp; Output Ownership</div><div class="gov-item val">Who owns AI-generated content. How it is disclosed internally and externally.</div></div>
+        <div class="gov-row"><div class="gov-item key">Vendor &amp; Tool Audit</div><div class="gov-item val">Full visibility of every AI tool in use — not just the sanctioned ones.</div></div>
+        <div class="gov-footer">Governance has to lead deployment — not chase it. Agentic AI systems don't just generate content — they perform actions. Without proper controls, they become automated risk vectors.</div>
+      </div>
+    </div>
+    <div class="del">
+      <div class="del-head"><span class="del-n">4</span><span class="del-t">Transformation Roadmap</span></div>
+      <p class="del-d">Prioritized next steps across three horizons:</p>
+      <ul class="del-bullets">
+        <li>Quick wins — 30-day initiatives that demonstrate value immediately</li>
+        <li>Strategic bets — 90-180 day initiatives that require deeper transformation</li>
+        <li>Capability gaps — skills, tools, or partnerships needed to get there</li>
+      </ul>
+      <p class="del-d" style="margin-top:8px;">Includes ROI framing suitable for a leadership or parent company conversation.</p>
+    </div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-label">Investment</div>
+    <div class="inv">
+      <div class="inv-label">Fixed Fee · Day and a Half Engagement</div>
+      <div class="inv-amount">$2,000</div>
+      <div class="inv-detail">
+        <strong>All four deliverables included</strong><br>
+        No travel costs — Denver-based, same city as retreat<br>
+        NDA executed prior to engagement<br>
+        Deliverables within 7 business days post-retreat<br>
+        20+ years inside lighting and electrical distribution — zero ramp-up time
+      </div>
+    </div>
+    <div class="roi-box">
+      <div class="roi-label">ROI Context</div>
+      <p class="roi-text">If this engagement identifies just one workflow that saves 5 hours per week across your team, that's 260 hours per year. At a blended team rate, that's $15K-$30K in annual value — from a $2,000 investment. Most engagements surface 5-10 automation opportunities.</p>
+    </div>
+    <div class="horizon">
+      <div class="horizon-title">What this opens up</div>
+      <p>This engagement is the diagnostic foundation. Once automation opportunities are mapped and governance is in place, the natural next steps are implementation — building the actual workflows, integrating tools, training the team. That work is scoped separately based on what the audit reveals.</p>
+    </div>
+  </div>
+
+  <div class="p-cta">
+    <div class="p-cta-inner">
+      <div class="p-cta-title">Ready to move forward?</div>
+      <div class="p-cta-sub">Schedule a call or send an email — whichever is easier. One conversation is all it takes to confirm the engagement and get the NDA in motion.</div>
+      <div class="p-cta-buttons">
+        <a class="p-cta-btn primary" href="https://calendly.com/micailajanevaughn/new-meeting-1" target="_blank">Schedule a Call</a>
+        <a class="p-cta-btn secondary" href="/cdn-cgi/l/email-protection#3b5652585a52575a515a555e4d5a4e5c53557b5c565a52571558545604484e59515e584f066c791e090b695e4f495e5a4f1e090b7e555c5a5c5e565e554f1d59545f420673521e090b7652585a52575a1e09781e090b721e090c5f1e090b5752505e1e090b4f541e090b56544d5e1e090b5d54494c5a495f15">Send an Email</a>
+      </div>
+      <div class="p-cta-note"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9df0f4fefcf4f1fcf7fcf3f8ebfce8faf5f3ddfaf0fcf4f1b3fef2f0">[email&#160;protected]</a> · 303.981.7338 · teloric.com</div>
+      <div class="p-cta-sxsw">Interested in the full SXSW 2026 AI landscape briefing? Ask for it.</div>
+    </div>
+  </div>
+
+  <footer class="p-footer">
+    <div>
+      <div class="p-footer-brand">Teloric</div>
+      <div class="p-footer-tag">Systems aligned to purpose</div>
+    </div>
+    <div class="p-footer-contact">
+      Micaila Vaughn · Denver, CO<br>
+      <a href="/cdn-cgi/l/email-protection#04696d67656d68656e656a61726571636c6a446369656d682a676b69"><span class="__cf_email__" data-cfemail="b8d5d1dbd9d1d4d9d2d9d6ddced9cddfd0d6f8dfd5d9d1d496dbd7d5">[email&#160;protected]</span></a>
+    </div>
+  </footer>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudfl
