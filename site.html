@@ -109,9 +109,162 @@
             .footer-buttons { flex-direction:column; align-items:center; }
             #chat-panel { width:calc(100vw - 40px); right:20px; bottom:80px; }
         }
+    
+        /* FIXED BOTTOM BAR */
+        #bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10,10,10,0.96);
+            border-top: 1px solid #2a2a2a;
+            padding: 12px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+            backdrop-filter: blur(8px);
+        }
+        .bar-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #3ecfbf;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .bar-meta {
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        .bar-resume {
+            display: inline-block;
+            border: 1px solid #3ecfbf;
+            color: #3ecfbf;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 8px 20px;
+            transition: background 0.2s, color 0.2s;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .bar-resume:hover { background: #3ecfbf; color: #000; }
+        body { padding-bottom: 60px; }
+
+    
+        /* STICKY SECTION NAV */
+        #section-nav {
+            position: sticky;
+            top: 57px;
+            z-index: 90;
+            background: rgba(15,15,15,0.97);
+            border-bottom: 1px solid #2a2a2a;
+            backdrop-filter: blur(8px);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        #section-nav::-webkit-scrollbar { display: none; }
+        .section-nav-inner {
+            display: flex;
+            gap: 0;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        .snav-btn {
+            background: none;
+            border: none;
+            color: #888;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            padding: 14px 16px;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .snav-btn:hover, .snav-btn.active { color: #3ecfbf; border-bottom-color: #3ecfbf; }
+
+        /* TL;DR CARD */
+        .tldr-card {
+            background: linear-gradient(135deg, #0d1a1a 0%, #111 100%);
+            border: 1px solid rgba(62,207,191,0.25);
+            border-radius: 4px;
+            padding: 32px 36px;
+            margin: 36px 0;
+        }
+        .tldr-label {
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #3ecfbf;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tldr-label::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #3ecfbf;
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        .tldr-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .tldr-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .tldr-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .tldr-item-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 3px;
+        }
+        .tldr-item-text {
+            font-size: 12px;
+            color: rgba(255,255,255,0.42);
+            line-height: 1.5;
+            margin: 0;
+        }
+        @media(max-width:600px) {
+            .tldr-grid { grid-template-columns: 1fr; }
+            .section-nav-inner { padding: 0 16px; }
+        }
+
     </style>
 </head>
 <body>
+
+
+<div id="bottom-bar">
+  <div>
+    <div class="bar-brand">Teloric × USESI</div>
+    <div class="bar-meta">Micaila Vaughn · Strategic Briefing</div>
+  </div>
+  <a class="bar-resume" href="Micaila-Vaughn-Resume.pdf" target="_blank">View Resume</a>
+</div>
 
 <nav>
     <div class="nav-brand">Teloric × USESI</div>
@@ -127,9 +280,20 @@
 
 <div id="briefing">
 
+<div id="section-nav">
+    <div class="section-nav-inner">
+        <button class="snav-btn active" onclick="scrollTo('inflection')">The Situation</button>
+        <button class="snav-btn" onclick="scrollTo('outcomes')">Three Outcomes</button>
+        <button class="snav-btn" onclick="scrollTo('cost')">Shared Cost</button>
+        <button class="snav-btn" onclick="scrollTo('model')">Engagement</button>
+        <button class="snav-btn" onclick="scrollTo('foundation')">Foundation</button>
+    </div>
+</div>
+
+
 <section>
 <div class="container">
-    <span class="section-label">The Inflection Point</span>
+    <span id="inflection" class="section-label">The Inflection Point</span>
     <div class="to-line">To the USESI Executive Team</div>
     <div class="intro-text">The tools are in place. The translation is the missing piece.</div>
     <p>USESI has already made the critical investment. Through the Shared Services Group, the digital engine is built. The AI licenses are rolling out. The infrastructure is in place. That is the right move — and it positions USESI ahead of most organizations in this industry.</p>
@@ -137,13 +301,48 @@
     <div class="highlight-box">
         <p><strong>I am not an IT consultant. I am a 20-year lighting veteran</strong> who understands exactly how a deal moves from initial specification through value engineering, submittal, award, and delivery. My role is to serve as the Strategic Bridge between the Shared Services Group's technical rollout and the operational ground truth of USESI's regional companies — ensuring that the investment already made actually delivers at the branch level.</p>
     </div>
+    
+    <div class="tldr-card">
+        <div class="tldr-label">The 30-Second Version</div>
+        <div class="tldr-grid">
+            <div class="tldr-item">
+                <div class="tldr-icon">⚡</div>
+                <div>
+                    <div class="tldr-item-title">The Problem</div>
+                    <p class="tldr-item-text">AI infrastructure is deployed. But without governance, domain expertise, and a translation layer, enterprise tools can't land in the operational reality of a lighting organization.</p>
+                </div>
+            </div>
+            <div class="tldr-item">
+                <div class="tldr-icon">🌉</div>
+                <div>
+                    <div class="tldr-item-title">The Role</div>
+                    <p class="tldr-item-text">20-year lighting veteran. Works alongside your technical teams — not around them. Translates the gap between SSG strategy and branch reality.</p>
+                </div>
+            </div>
+            <div class="tldr-item">
+                <div class="tldr-icon">🏗️</div>
+                <div>
+                    <div class="tldr-item-title">Three Outcomes</div>
+                    <p class="tldr-item-text">AI that lands in real workflows. A mentorship program that captures veteran expertise. Visibility across all 14 companies.</p>
+                </div>
+            </div>
+            <div class="tldr-item">
+                <div class="tldr-icon">💡</div>
+                <div>
+                    <div class="tldr-item-title">The Model</div>
+                    <p class="tldr-item-text">One parent-level engagement. Cost shared across 14 companies. Three tiers — from a fixed-fee diagnostic to a fully embedded partnership.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <p>The three outcomes this engagement drives: AI tools that lighting teams actually use. A Mentorship Architecture that captures veteran expertise before it retires. And a Visibility Layer that gives the parent company intelligence across all 14 companies that currently exists nowhere.</p>
 </div>
 </section>
 
 <section>
 <div class="container">
-    <span class="section-label">Three Strategic Outcomes</span>
+    <span id="outcomes" class="section-label">Three Strategic Outcomes</span>
     <div class="intro-text">What this engagement delivers — and for whom.</div>
     <div class="pillars">
         <div class="pillar">
@@ -160,7 +359,7 @@
         <div class="pillar">
             <h3>II. The Mentorship Architecture</h3>
             <div class="pillar-meta">Codifying the USESI Brain Trust before it retires</div>
-            <p>The greatest risk to USESI's long-term growth is not technology — it is the expertise leak. Every month, 30-year veterans retire and take decades of uncaptured lighting knowledge with them. This pillar builds a structured 1-2 year mentorship program — not a course library, not a one-time onboarding — a living program that pairs new hires with curriculum, with experienced professionals, and with the specific knowledge of how lighting works inside USESI's ecosystem.</p>
+            <p>In twenty years across the lighting channel, the pattern I see most consistently — and the one with the highest compounding return when addressed — is the expertise leak. Veterans retire and take decades of uncaptured knowledge with them. From my experience, the organizations that get ahead of this build a structured 1-2 year mentorship program — not a course library, not a one-time onboarding — a living program that pairs new hires with curriculum, with experienced professionals, and with the specific knowledge of how lighting actually works inside the organization.</p>
             <ul>
                 <li>Codify veteran expertise — spec strategies, manufacturer relationships, pricing instincts — into a repeatable training engine</li>
                 <li>Design a hybrid curriculum using Rocky Mountain Lighting Academy and IES courses as a foundation, customized for USESI's operational model</li>
@@ -185,7 +384,7 @@
 
 <section>
 <div class="container">
-    <span class="section-label">The Shared Cost Logic</span>
+    <span id="cost" class="section-label">The Shared Cost Logic</span>
     <div class="intro-text">One strategic role. Fourteen companies. The cost is shared. The return compounds.</div>
     <p>By engaging at the parent company level, this is not a cost absorbed by a single regional branch. It is a shared investment that serves the entire USESI network — every brand, every region, every branch — simultaneously.</p>
     <div class="hub-quote">
@@ -212,7 +411,7 @@
 
 <section>
 <div class="container">
-    <span class="section-label">Engagement Model</span>
+    <span id="model" class="section-label">Engagement Model</span>
     <div class="intro-text">Three tiers. Structured for where USESI is — and where it's going.</div>
     <p>Scope and investment are defined collaboratively based on organizational priorities and timeline. Every tier is built on the same foundation: embedded, measurable, and designed from day one for the organization to own the outcome independently.</p>
     <div class="tiers">
@@ -247,7 +446,7 @@
 
 <section>
 <div class="container">
-    <span class="section-label">The Foundation</span>
+    <span id="foundation" class="section-label">The Foundation</span>
     <div class="intro-text">Twenty years inside architectural lighting. Every side of the table.</div>
     <p>Manufacturing, rep networks, regional sales, national accounts. The full arc of how a lighting project actually moves — from the first spec conversation through value engineering, submittal, award, and delivery. Every role in the channel. Every friction point. Every place where intelligence gets created and then disappears.</p>
     <p>Teloric is the synthesis of that experience — AI systems strategy built for the industries I know from the inside, working alongside the teams already doing the work. NLP Practitioner certified. SXSW 2026 Innovation Badge, AI track. WILD National — built the mentorship program from analog to digital, now supporting 100+ women in the architectural lighting industry.</p>
@@ -266,44 +465,14 @@
         </div>
         <div class="footer-contact"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a6cbcfc5c7cfcac7ccc7c8c3d0c7d3c1cec8e6c1cbc7cfca88c5c9cb">[email&#160;protected]</a> · 303.981.7338 · teloric.com</div>
         <div class="footer-links">
-            <a href="Micaila-Vaughn-Resume.pdf" target="_blank">View Resume</a>
+            
             <a href="https://teloric.com" target="_blank">Teloric.com</a>
             <a href="https://micailajanevaughn-glitch.github.io/Engagement-Proposal-Wiedenbach-Brown/" target="_blank">WB Retreat Proposal</a>
         </div>
     </div>
 </footer>
 
-<!-- CHAT WIDGET -->
-<div id="chat-bubble">
-    <div id="chat-panel">
-        <div id="chat-header">
-            <div id="chat-header-text">
-                <div id="chat-header-title">Ask about this proposal</div>
-                <div id="chat-header-sub">Powered by Claude · Teloric</div>
-            </div>
-            <button id="chat-close" onclick="toggleChat()">×</button>
-        </div>
-        <div id="chat-messages">
-            <div class="msg assistant">Hey — good to see you made it this far. I know everything about this proposal. Seriously, ask me anything. Even the awkward questions.</div>
-        </div>
-        <div id="chat-suggestions">
-            <button class="suggestion" onclick="askSuggestion(this)">Wait, what even is this?</button>
-            <button class="suggestion" onclick="askSuggestion(this)">Why should I care about this?</button>
-            <button class="suggestion" onclick="askSuggestion(this)">What does this actually cost?</button>
-            <button class="suggestion" onclick="askSuggestion(this)">Who is Micaila?</button>
-        </div>
-        <div id="chat-input-wrap">
-            <input id="chat-input" type="text" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendMessage()">
-            <button id="chat-send" onclick="sendMessage()">→</button>
-        </div>
-    </div>
-    <button id="chat-toggle" onclick="toggleChat()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        Ask about this proposal
-    </button>
-</div>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const PROPOSAL_CONTEXT = `You are an AI assistant embedded in a strategic consulting proposal for USESI, a national electrical distribution company with 14 regional companies and 150+ locations. The proposal is from Micaila Vaughn, Founder of Teloric.
 
 KEY FACTS:
